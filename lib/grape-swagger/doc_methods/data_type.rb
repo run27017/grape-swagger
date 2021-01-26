@@ -55,7 +55,7 @@ module GrapeSwagger
           elsif model.to_s.start_with?('Entity::', 'Entities::', 'Representable::')
             model.to_s.split('::')[1..-1].join('_')
           elsif model.to_s =~ /#<Class:(\w+)>/
-            "Class_#{$1}"
+            "Class_#{Regexp.last_match(1)}"
           else
             model.to_s.split('::').join('_')
           end

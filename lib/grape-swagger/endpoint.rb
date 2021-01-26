@@ -239,6 +239,10 @@ module Grape
     def http_codes_from_route(route)
       if route.http_codes.is_a?(Array) && route.http_codes.any? { |code| success_code?(code) }
         route.http_codes.clone
+      elsif route.options[:settings].try(:[], :status)
+        route.options[:settings][:status].map do |code, options|
+          { code: code, message: options[:message], model: options[:entity] }
+        end
       else
         success_codes_from_route(route) + (route.http_codes || route.options[:failure] || [])
       end
