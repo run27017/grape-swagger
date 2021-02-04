@@ -103,7 +103,7 @@ describe '#579 put / post parameters spec' do
         [
           { 'in' => 'path', 'name' => 'guid', 'type' => 'string', 'format' => 'guid', 'required' => true },
           {
-            'name' => 'Issue579ImplicitBodyParameter', 'in' => 'body', 'required' => true, 'schema' => {
+            'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => {
               '$ref' => '#/definitions/putIssue579ImplicitBodyParameter'
             }
           }
@@ -130,7 +130,7 @@ describe '#579 put / post parameters spec' do
         [
           { 'in' => 'path', 'name' => 'guid', 'type' => 'string', 'format' => 'guid', 'required' => true },
           {
-            'name' => 'Issue579ExplicitBodyParameter', 'in' => 'body', 'required' => true, 'schema' => {
+            'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => {
               '$ref' => '#/definitions/putIssue579ExplicitBodyParameter'
             }
           }
@@ -157,7 +157,7 @@ describe '#579 put / post parameters spec' do
         [
           { 'in' => 'path', 'name' => 'guid', 'type' => 'string', 'format' => 'guid', 'required' => true },
           {
-            'name' => 'Issue579NamespaceParamGuidBodyParameter', 'in' => 'body', 'required' => true, 'schema' => {
+            'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => {
               '$ref' => '#/definitions/putIssue579NamespaceParamGuidBodyParameter'
             }
           }

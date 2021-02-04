@@ -103,7 +103,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         subject.to_definition(path, params, route, definitions)
         expect(params).to eql(
           [
-            { name: 'InBody', in: 'body', required: true, schema: { '$ref' => '#/definitions/postInBody' } }
+            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/definitions/postInBody' } }
           ]
         )
         expect(subject.definitions['postInBody']).not_to include :description
@@ -120,7 +120,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         expect(params).to eql(
           [
             { in: 'path', name: 'key', description: nil, type: 'integer', format: 'int32', required: true },
-            { name: 'InBody', in: 'body', required: true, schema: { '$ref' => '#/definitions/putInBody' } }
+            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/definitions/putInBody' } }
           ]
         )
         expect(subject.definitions['putInBody']).not_to include :description

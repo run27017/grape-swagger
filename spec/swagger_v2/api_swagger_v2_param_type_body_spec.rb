@@ -85,7 +85,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
     specify do
       expect(subject['paths']['/wo_entities/in_body']['post']['parameters']).to eql(
         [
-          { 'name' => 'WoEntitiesInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postWoEntitiesInBody' } }
+          { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postWoEntitiesInBody' } }
         ]
       )
     end
@@ -107,7 +107,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
       expect(subject['paths']['/wo_entities/in_body/{key}']['put']['parameters']).to eql(
         [
           { 'in' => 'path', 'name' => 'key', 'type' => 'integer', 'format' => 'int32', 'required' => true },
-          { 'name' => 'WoEntitiesInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putWoEntitiesInBody' } }
+          { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putWoEntitiesInBody' } }
         ]
       )
     end
@@ -134,7 +134,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
     specify do
       expect(subject['paths']['/with_entities/in_body']['post']['parameters']).to eql(
         [
-          { 'name' => 'WithEntitiesInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postWithEntitiesInBody' } }
+          { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postWithEntitiesInBody' } }
         ]
       )
     end
@@ -154,7 +154,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
       expect(subject['paths']['/with_entities/in_body/{id}']['put']['parameters']).to eql(
         [
           { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
-          { 'name' => 'WithEntitiesInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putWithEntitiesInBody' } }
+          { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putWithEntitiesInBody' } }
         ]
       )
     end
@@ -174,7 +174,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
     let(:request_parameters_definition) do
       [
         {
-          'name' => 'WithEntityParam',
+          'name' => 'body',
           'in' => 'body',
           'required' => true,
           'schema' => {

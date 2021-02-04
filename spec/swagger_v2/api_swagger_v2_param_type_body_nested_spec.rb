@@ -115,7 +115,7 @@ describe 'moving body/formData Params to definitions' do
       specify do
         expect(subject['paths']['/simple_nested_params/in_body']['post']['parameters']).to eql(
           [
-            { 'name' => 'SimpleNestedParamsInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postSimpleNestedParamsInBody' } }
+            { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/postSimpleNestedParamsInBody' } }
           ]
         )
       end
@@ -155,7 +155,7 @@ describe 'moving body/formData Params to definitions' do
         expect(subject['paths']['/simple_nested_params/in_body/{id}']['put']['parameters']).to eql(
           [
             { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
-            { 'name' => 'SimpleNestedParamsInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putSimpleNestedParamsInBody' } }
+            { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putSimpleNestedParamsInBody' } }
           ]
         )
       end
@@ -192,7 +192,7 @@ describe 'moving body/formData Params to definitions' do
         expect(subject['paths']['/multiple_nested_params/in_body']['post']['parameters']).to eql(
           [
             {
-              'name' => 'MultipleNestedParamsInBody',
+              'name' => 'body',
               'in' => 'body',
               'required' => true,
               'schema' => { '$ref' => '#/definitions/postMultipleNestedParamsInBody' }
@@ -245,7 +245,7 @@ describe 'moving body/formData Params to definitions' do
         expect(subject['paths']['/multiple_nested_params/in_body/{id}']['put']['parameters']).to eql(
           [
             { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
-            { 'name' => 'MultipleNestedParamsInBody', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putMultipleNestedParamsInBody' } }
+            { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/definitions/putMultipleNestedParamsInBody' } }
           ]
         )
       end
