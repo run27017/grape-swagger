@@ -31,7 +31,7 @@ describe 'Default API' do
         'paths' => {
           '/something' => {
             'get' => {
-              'description' => 'This gets something.',
+              'summary' => 'This gets something.',
               'produces' => ['application/json'],
               'tags' => ['something'],
               'operationId' => 'getSomething',
@@ -77,7 +77,7 @@ describe 'Default API' do
                             'paths' => {
                               '/something' => {
                                 'get' => {
-                                  'description' => 'This gets something.',
+                                  'summary' => 'This gets something.',
                                   'produces' => ['application/json'],
                                   'tags' => ['something'],
                                   'operationId' => 'getSomething',

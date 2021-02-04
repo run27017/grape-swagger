@@ -37,7 +37,7 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/use-response']['get']).to eql(
-        'description' => 'This returns something',
+        'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseResponse' } },

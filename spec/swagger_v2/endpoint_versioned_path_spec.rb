@@ -123,8 +123,8 @@ describe 'Grape::Endpoint#path_and_definitions' do
     end
 
     it 'retrieves both apis with descriptions' do
-      expect(subject.first['/v1/item'][:get][:description]).to eq 'Item description'
-      expect(subject.first['/v2/item'][:get][:description]).to eq 'Item description'
+      expect(subject.first['/v1/item'][:get][:summary]).to eq 'Item description'
+      expect(subject.first['/v2/item'][:get][:summary]).to eq 'Item description'
     end
   end
 end

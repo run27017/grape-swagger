@@ -105,7 +105,7 @@ describe 'a simple mounted api' do
         'paths' => {
           '/' => {
             'get' => {
-              'description' => 'Document root',
+              'summary' => 'Document root',
               'produces' => ['application/json'],
               'responses' => { '200' => { 'description' => 'Document root' } },
               'operationId' => 'get'
@@ -113,7 +113,7 @@ describe 'a simple mounted api' do
           },
           '/simple' => {
             'get' => {
-              'description' => 'This gets something.',
+              'summary' => 'This gets something.',
               'produces' => ['application/json'],
               'tags' => ['simple'],
               'operationId' => 'getSimple',
@@ -122,7 +122,7 @@ describe 'a simple mounted api' do
           },
           '/simple-test' => {
             'get' => {
-              'description' => 'This gets something for URL using - separator.',
+              'summary' => 'This gets something for URL using - separator.',
               'produces' => ['application/json'],
               'tags' => ['simple-test'],
               'operationId' => 'getSimpleTest',
@@ -147,7 +147,7 @@ describe 'a simple mounted api' do
           },
           '/simple_with_headers' => {
             'get' => {
-              'description' => 'this gets something else',
+              'summary' => 'this gets something else',
               'produces' => ['application/json'],
               'parameters' => [
                 { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'type' => 'string', 'required' => true },
@@ -164,7 +164,7 @@ describe 'a simple mounted api' do
           },
           '/items' => {
             'post' => {
-              'description' => 'this takes an array of parameters',
+              'summary' => 'this takes an array of parameters',
               'produces' => ['application/json'],
               'consumes' => ['application/json'],
               'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'string' } }],
@@ -175,7 +175,7 @@ describe 'a simple mounted api' do
           },
           '/custom' => {
             'get' => {
-              'description' => 'this uses a custom parameter',
+              'summary' => 'this uses a custom parameter',
               'produces' => ['application/json'],
               'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'CustomType' } }],
               'tags' => ['custom'],
@@ -206,7 +206,7 @@ describe 'a simple mounted api' do
         'paths' => {
           '/simple' => {
             'get' => {
-              'description' => 'This gets something.',
+              'summary' => 'This gets something.',
               'produces' => ['application/json'],
               'tags' => ['simple'],
               'operationId' => 'getSimple',
@@ -237,7 +237,7 @@ describe 'a simple mounted api' do
           'paths' => {
             '/simple-test' => {
               'get' => {
-                'description' => 'This gets something for URL using - separator.',
+                'summary' => 'This gets something for URL using - separator.',
                 'produces' => ['application/json'],
                 'tags' => ['simple-test'],
                 'operationId' => 'getSimpleTest',
@@ -259,7 +259,7 @@ describe 'a simple mounted api' do
         expect(subject['paths']).to eq(
           '/simple_with_headers' => {
             'get' => {
-              'description' => 'this gets something else',
+              'summary' => 'this gets something else',
               'produces' => ['application/json'],
               'parameters' => [
                 { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'type' => 'string', 'required' => true },
@@ -288,7 +288,7 @@ describe 'a simple mounted api' do
         expect(subject['paths']).to eq(
           '/items' => {
             'post' => {
-              'description' => 'this takes an array of parameters',
+              'summary' => 'this takes an array of parameters',
               'produces' => ['application/json'],
               'consumes' => ['application/json'],
               'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'string' } }],
@@ -311,7 +311,7 @@ describe 'a simple mounted api' do
         expect(subject['paths']).to eq(
           '/custom' => {
             'get' => {
-              'description' => 'this uses a custom parameter',
+              'summary' => 'this uses a custom parameter',
               'produces' => ['application/json'],
               'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'CustomType' } }],
               'tags' => ['custom'],

@@ -92,7 +92,7 @@ describe 'a guarded api endpoint' do
           'paths' => {
             '/auth' => {
               'get' => {
-                'description' => 'Show endpoint if authenticated',
+                'summary' => 'Show endpoint if authenticated',
                 'produces' => ['application/json'],
                 'tags' => ['auth'],
                 'operationId' => 'getAuth',
@@ -134,7 +134,7 @@ describe 'a guarded api endpoint' do
           'paths' => {
             '/auth' => {
               'get' => {
-                'description' => 'Show endpoint if authenticated',
+                'summary' => 'Show endpoint if authenticated',
                 'produces' => ['application/json'],
                 'tags' => ['auth'],
                 'operationId' => 'getAuth',

@@ -58,7 +58,7 @@ describe 'response' do
     end
     specify do
       expect(subject['paths']['/nested_type']['get']).to eql(
-        'description' => 'This returns something',
+        'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseItemResponseAsType' } },
@@ -79,7 +79,7 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/entity_response']['get']).to eql(
-        'description' => 'This returns something',
+        'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
@@ -100,7 +100,7 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/params_given']['post']).to eql(
-        'description' => 'This returns something',
+        'summary' => 'This returns something',
         'produces' => ['application/json'],
         'consumes' => ['application/json'],
         'parameters' => [
@@ -126,7 +126,7 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/multiple-success-responses']['get']).to eql(
-        'description' => 'This returns something',
+        'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'Request has succeeded' },
