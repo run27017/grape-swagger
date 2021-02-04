@@ -298,7 +298,7 @@ module Grape
                   else
                     build_reference_hash(response_model)
                   end
-      return reference unless value[:code] < 300
+      return reference unless value[:code].is_a?(Numeric) && value[:code] < 300
 
       if value.key?(:as) && value.key?(:is_array)
         reference[value[:as]] = build_reference_array(reference[value[:as]])

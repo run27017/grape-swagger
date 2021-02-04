@@ -16,7 +16,13 @@ describe 'response' do
         status 404, 'not found' do
           expose :code
         end
-        get '/use-response-2' do
+        get '/use-status-dsl' do
+          { 'declared_params' => declared(params) }
+        end
+
+        desc 'This returns something'
+        success Entities::UseResponse
+        get '/use-success-dsl' do
           { 'declared_params' => declared(params) }
         end
 
@@ -31,12 +37,12 @@ describe 'response' do
 
   describe 'uses entity defined by status DSL as response object' do
     subject do
-      get '/swagger_doc/use-response-2'
+      get '/swagger_doc/use-status-dsl'
       JSON.parse(last_response.body)
     end
 
     specify do
-      responses = subject['paths']['/use-response-2']['get']['responses']
+      responses = subject['paths']['/use-status-dsl']['get']['responses']
       expect(responses).to include(
         '200' => { 'description' => '', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
         '400' => { 'description' => 'bad request', 'schema' => { '$ref' => '#/definitions/ApiError' } },
@@ -45,6 +51,20 @@ describe 'response' do
 
       expect(subject['definitions']).to include(swagger_entity_as_response_object)
       expect(subject['definitions'].keys).to include(a_string_matching(/Class_\w+/))
+    end
+  end
+
+  describe 'uses entity defined by success DSL as response object' do
+    subject do
+      get '/swagger_doc/use-success-dsl'
+      JSON.parse(last_response.body)
+    end
+
+    specify do
+      responses = subject['paths']['/use-success-dsl']['get']['responses']
+      expect(responses).to include(
+        'success' => { 'description' => '', 'schema' => { '$ref' => '#/definitions/UseResponse' } }
+      )
     end
   end
 end
