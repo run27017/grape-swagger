@@ -44,8 +44,6 @@ module GrapeSwagger
 
           move_params_to_new(definition, params)
 
-          definition[:description] = route.description if route.try(:description)
-
           build_body_parameter(referenced_definition, 'body', route.options)
         end
 

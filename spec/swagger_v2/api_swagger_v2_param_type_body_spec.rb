@@ -92,7 +92,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
 
     specify do
       expect(subject['definitions']['postWoEntitiesInBody']).to eql(
-        'description' => 'post in body /wo entity',
         'type' => 'object',
         'properties' => {
           'in_body_1' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'in_body_1' },
@@ -114,7 +113,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
 
     specify do
       expect(subject['definitions']['putWoEntitiesInBody']).to eql(
-        'description' => 'put in body /wo entity',
         'type' => 'object',
         'properties' => {
           'in_body_1' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'in_body_1' },
@@ -145,8 +143,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
         'properties' => {
           'name' => { 'type' => 'string', 'description' => 'name' }
         },
-        'required' => ['name'],
-        'description' => 'post in body with entity'
+        'required' => ['name']
       )
     end
 
@@ -164,8 +161,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
         'type' => 'object',
         'properties' => {
           'name' => { 'type' => 'string', 'description' => 'name' }
-        },
-        'description' => 'put in body with entity'
+        }
       )
     end
   end
@@ -192,8 +188,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
             '$ref' => '#/definitions/NestedModule_ApiResponse',
             'description' => 'request data'
           }
-        },
-        'description' => 'put in body with entity parameter'
+        }
       }
     end
 

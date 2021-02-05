@@ -145,17 +145,17 @@ RSpec.shared_context 'entity swagger example' do
 
   let(:swagger_nested_type) do
     {
-      'ApiError' => { 'type' => 'object', 'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } }, 'description' => 'ApiError model' },
+      'ApiError' => { 'type' => 'object', 'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } } },
       'ResponseItem' => { 'type' => 'object', 'properties' => { 'id' => { 'type' => 'integer', 'format' => 'int32' }, 'name' => { 'type' => 'string' } } },
-      'UseItemResponseAsType' => { 'type' => 'object', 'properties' => { 'description' => { 'type' => 'string' }, 'responses' => { '$ref' => '#/definitions/ResponseItem' } }, 'description' => 'UseItemResponseAsType model' }
+      'UseItemResponseAsType' => { 'type' => 'object', 'properties' => { 'description' => { 'type' => 'string' }, 'responses' => { '$ref' => '#/definitions/ResponseItem' } } }
     }
   end
 
   let(:swagger_entity_as_response_object) do
     {
-      'ApiError' => { 'type' => 'object', 'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } }, 'description' => 'ApiError model' },
+      'ApiError' => { 'type' => 'object', 'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } } },
       'ResponseItem' => { 'type' => 'object', 'properties' => { 'id' => { 'type' => 'integer', 'format' => 'int32' }, 'name' => { 'type' => 'string' } } },
-      'UseResponse' => { 'type' => 'object', 'properties' => { 'description' => { 'type' => 'string' }, '$responses' => { 'type' => 'array', 'items' => { '$ref' => '#/definitions/ResponseItem' } } }, 'description' => 'UseResponse model' }
+      'UseResponse' => { 'type' => 'object', 'properties' => { 'description' => { 'type' => 'string' }, '$responses' => { 'type' => 'array', 'items' => { '$ref' => '#/definitions/ResponseItem' } } } }
     }
   end
 
@@ -300,7 +300,6 @@ RSpec.shared_context 'entity swagger example' do
           'type' => 'object',
           'required' => ['elements'],
           'properties' => { 'elements' => { 'type' => 'array', 'items' => { '$ref' => '#/definitions/QueryInputElement' }, 'description' => 'Set of configuration' } },
-          'description' => 'QueryInput model'
         },
         'QueryInputElement' => {
           'type' => 'object',
@@ -310,7 +309,6 @@ RSpec.shared_context 'entity swagger example' do
         'ApiError' => {
           'type' => 'object',
           'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } },
-          'description' => 'ApiError model'
         },
         'Something' => {
           'type' => 'object',
@@ -320,7 +318,6 @@ RSpec.shared_context 'entity swagger example' do
             'links' => { 'type' => 'array', 'items' => { 'type' => 'link' } },
             'others' => { 'type' => 'text' }
           },
-          'description' => 'Something model'
         }
       }
     }

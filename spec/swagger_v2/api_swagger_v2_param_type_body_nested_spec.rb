@@ -144,8 +144,7 @@ describe 'moving body/formData Params to definitions' do
               },
               'required' => %w[name]
             }
-          },
-          'description' => 'post in body with nested parameters'
+          }
         )
       end
     end
@@ -174,8 +173,7 @@ describe 'moving body/formData Params to definitions' do
                 'country' => { 'type' => 'string', 'description' => 'country' }
               }
             }
-          },
-          'description' => 'put in body with nested parameters'
+          }
         )
       end
     end
@@ -234,8 +232,7 @@ describe 'moving body/formData Params to definitions' do
               },
               'required' => %w[name]
             }
-          },
-          'description' => 'put in body with multiple nested parameters'
+          }
         )
       end
     end
@@ -274,8 +271,7 @@ describe 'moving body/formData Params to definitions' do
                 'country' => { 'type' => 'string', 'description' => 'country' }
               }
             }
-          },
-          'description' => 'put in body with multiple nested parameters'
+          }
         )
       end
     end
