@@ -195,11 +195,13 @@ module Grape
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
 
+      parameters.each { |param| make_ref_to_nested_schema!(param) } if options[:embedded_schema]
+
       parameters.presence
     end
 
     def response_object(route, options)
-      codes(route).each_with_object({}) do |value, memo|
+      responses = codes(route).each_with_object({}) do |value, memo|
         value[:message] ||= ''
         memo[value[:code]] = { description: value[:message] ||= '' } unless memo[value[:code]].present?
         memo[value[:code]][:headers] = value[:headers] if value[:headers]
@@ -222,6 +224,12 @@ module Grape
         build_memo_schema(memo, route, value, response_model, options)
         memo[value[:code]][:examples] = value[:examples] if value[:examples]
       end
+
+      responses.each do |code, item|
+        make_ref_to_nested_schema!(item)
+      end if options[:embedded_schema]
+
+      responses
     end
 
     def codes(route)
@@ -269,6 +277,15 @@ module Grape
     end
 
     private
+
+    def make_ref_to_nested_schema!(object)
+      if object.key?(:schema) && object[:schema].key?('$ref')
+        definition_name = %r{#/definitions/(\w+)}.match(object[:schema]['$ref'])[1]
+        object[:schema] = @definitions[definition_name]
+      end
+
+      object
+    end
 
     def build_memo_schema(memo, route, value, response_model, options)
       if memo[value[:code]][:schema] && value[:as]
