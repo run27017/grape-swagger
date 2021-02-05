@@ -12,6 +12,7 @@ describe 'response' do
 
         desc 'This returns something'
         status 200, Entities::UseResponse
+        status 204, 'no content'
         status 400, 'bad request', Entities::ApiError
         status 404, 'not found' do
           expose :code
@@ -45,6 +46,7 @@ describe 'response' do
       responses = subject['paths']['/use-status-dsl']['get']['responses']
       expect(responses).to include(
         '200' => { 'description' => '', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
+        '204' => { 'description' => 'no content' },
         '400' => { 'description' => 'bad request', 'schema' => { '$ref' => '#/definitions/ApiError' } },
         '404' => { 'description' => 'not found', 'schema' => { '$ref' => a_string_matching(%r{Class_\w+}) } }
       )
