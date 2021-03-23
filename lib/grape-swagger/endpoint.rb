@@ -76,6 +76,8 @@ module Grape
 
     # building path and definitions objects
     def path_and_definition_objects(namespace_routes, options)
+      return [@paths, @definitions] if @paths
+
       @paths = {}
       @definitions = {}
       add_definitions_from options[:models]
@@ -83,6 +85,10 @@ module Grape
         path_item(routes, options)
       end
 
+      if options[:models_flatten]
+        @paths = make_models_flatten!(@paths, @definitions)
+        @definitions = {}
+      end
       [@paths, @definitions]
     end
 
@@ -195,13 +201,11 @@ module Grape
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
 
-      parameters.each { |param| make_ref_to_nested_schema!(param) } if options[:embedded_schema]
-
       parameters.presence
     end
 
     def response_object(route, options)
-      responses = codes(route).each_with_object({}) do |value, memo|
+      codes(route).each_with_object({}) do |value, memo|
         value[:message] ||= ''
         memo[value[:code]] = { description: value[:message] ||= '' } unless memo[value[:code]].present?
         memo[value[:code]][:headers] = value[:headers] if value[:headers]
@@ -224,12 +228,6 @@ module Grape
         build_memo_schema(memo, route, value, response_model, options)
         memo[value[:code]][:examples] = value[:examples] if value[:examples]
       end
-
-      responses.each do |code, item|
-        make_ref_to_nested_schema!(item)
-      end if options[:embedded_schema]
-
-      responses
     end
 
     def codes(route)
@@ -277,15 +275,6 @@ module Grape
     end
 
     private
-
-    def make_ref_to_nested_schema!(object)
-      if object.key?(:schema) && object[:schema].key?('$ref')
-        definition_name = %r{#/definitions/(\w+)}.match(object[:schema]['$ref'])[1]
-        object[:schema] = @definitions[definition_name]
-      end
-
-      object
-    end
 
     def build_memo_schema(memo, route, value, response_model, options)
       if memo[value[:code]][:schema] && value[:as]
@@ -448,6 +437,28 @@ module Grape
       end
 
       default_code
+    end
+
+    # make all $ref property flatten
+    def make_models_flatten!(object, definitions)
+      if object.is_a?(Hash)
+        if object.key?('$ref')
+          prefix = '#/definitions/'
+          unless object['$ref'].start_with?('#/definitions/')
+            raise "$ref value must start with '#{prefix}', but it is '#{object['$ref']}'" 
+          end
+
+          path = object.delete('$ref')[prefix.length..-1].split('/')
+          model = definitions.dig(*path)
+          object.merge!(model)
+        end
+
+        object.each { |key, val| make_models_flatten!(val, definitions) }
+      elsif object.is_a?(Array)
+        object.each { |val| make_models_flatten!(val, definitions) }
+      end
+
+      object
     end
   end
 end
