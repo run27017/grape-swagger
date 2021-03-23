@@ -81,6 +81,7 @@ module GrapeSwagger
     end
 
     def setup(options)
+      doc_cache = nil
       options = DEFAULTS.merge(options)
 
       # options could be set on #add_swagger_documentation call,
@@ -102,8 +103,12 @@ module GrapeSwagger
         header['Access-Control-Allow-Origin']   = '*'
         header['Access-Control-Request-Method'] = '*'
 
-        GrapeSwagger::DocMethods
+        return doc_cache if options[:use_cache] && doc_cache
+
+        output = GrapeSwagger::DocMethods
           .output_path_definitions(target_class.combined_namespace_routes, self, target_class, options)
+        doc_cache = output if options[:use_cache]
+        output
       end
 
       desc specific_api_doc.delete(:desc), { params: specific_api_doc.delete(:params) || {}, **specific_api_doc }
