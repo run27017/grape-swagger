@@ -118,7 +118,7 @@ module GrapeSwagger
             'path'
           elsif param_type
             param_type
-          elsif %w[POST PUT PATCH].include?(value_type[:method])
+          elsif %w[POST PUT PATCH DELETE].include?(value_type[:method])
             if options.key?(:default_param_type)
               options[:default_param_type]
             else
