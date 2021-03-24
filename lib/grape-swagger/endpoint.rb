@@ -192,7 +192,7 @@ module Grape
         elsif value[:type]
           expose_params(value[:type])
         end
-        memo << GrapeSwagger::DocMethods::ParseParams.call(param, value, path, route, @definitions)
+        memo << GrapeSwagger::DocMethods::ParseParams.call(param, value, path, route, @definitions, options)
       end
 
       if GrapeSwagger::DocMethods::MoveParams.can_be_moved?(route.request_method, parameters)
