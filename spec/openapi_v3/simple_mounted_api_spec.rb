@@ -90,7 +90,7 @@ describe 'a simple mounted api' do
         'info' => {
           'title' => 'API title', 'version' => '0.0.1'
         },
-        'swagger' => '2.0',
+        'openapi' => '3.0.0',
         'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
         'host' => 'example.org',
         'tags' => [
@@ -197,7 +197,7 @@ describe 'a simple mounted api' do
     specify do
       expect(subject).to eq(
         'info' => { 'title' => 'API title', 'version' => '0.0.1' },
-        'swagger' => '2.0',
+        'openapi' => '3.0.0',
         'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
         'host' => 'example.org',
         'tags' => [
@@ -228,7 +228,7 @@ describe 'a simple mounted api' do
       specify do
         expect(subject).to eq(
           'info' => { 'title' => 'API title', 'version' => '0.0.1' },
-          'swagger' => '2.0',
+          'openapi' => '3.0.0',
           'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
           'host' => 'example.org',
           'tags' => [

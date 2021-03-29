@@ -26,7 +26,7 @@ module Grape
     def swagger_object(target_class, request, options)
       object = {
         info: info_object(options[:info].merge(version: options[:doc_version])),
-        swagger: '2.0',
+        openapi: '3.0.0',
         produces: content_types_for(target_class),
         authorizations: options[:authorizations],
         securityDefinitions: options[:security_definitions],

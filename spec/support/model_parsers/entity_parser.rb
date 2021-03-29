@@ -194,7 +194,7 @@ RSpec.shared_context 'entity swagger example' do
         'license' => { 'name' => 'The name of the license.', 'url' => 'www.The-URL-of-the-license.org' },
         'version' => '0.0.1'
       },
-      'swagger' => '2.0',
+      'openapi' => '3.0.0',
       'produces' => ['application/json'],
       'host' => 'example.org',
       'basePath' => '/api',

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'swagger spec v2.0' do
+describe 'openapi spec v3.0' do
   include_context "#{MODEL_PARSER} swagger example"
 
   def app
@@ -129,8 +129,8 @@ describe 'swagger spec v2.0' do
 
     describe 'swagger object' do
       describe 'required keys' do
-        it { expect(subject.keys).to include 'swagger' }
-        it { expect(subject['swagger']).to eql '2.0' }
+        it { expect(subject.keys).to include 'openapi' }
+        it { expect(subject['openapi']).to eql '3.0.0' }
         it { expect(subject.keys).to include 'info' }
         it { expect(subject['info']).to be_a Hash }
         it { expect(subject.keys).to include 'paths' }
