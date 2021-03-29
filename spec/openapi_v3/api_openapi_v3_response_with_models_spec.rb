@@ -40,9 +40,9 @@ describe 'response' do
         'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
+          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
           '400' => { 'description' => 'NotFound' },
-          '404' => { 'description' => 'BadRequest', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '404' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['use-response'],
         'operationId' => 'getUseResponse'

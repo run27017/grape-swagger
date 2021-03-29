@@ -45,10 +45,10 @@ describe 'response' do
     specify do
       responses = subject['paths']['/use-status-dsl']['get']['responses']
       expect(responses).to include(
-        '200' => { 'description' => '', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
+        '200' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
         '204' => { 'description' => 'no content' },
-        '400' => { 'description' => 'bad request', 'schema' => { '$ref' => '#/definitions/ApiError' } },
-        '404' => { 'description' => 'not found', 'schema' => { '$ref' => a_string_matching(%r{Class_\w+}) } }
+        '400' => { 'description' => 'bad request', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } },
+        '404' => { 'description' => 'not found', 'content' => { 'application/json' => { 'schema' => { '$ref' => a_string_matching(%r{Class_\w+}) } } } }
       )
 
       expect(subject['definitions']).to include(swagger_entity_as_response_object)
@@ -65,7 +65,7 @@ describe 'response' do
     specify do
       responses = subject['paths']['/use-success-dsl']['get']['responses']
       expect(responses).to include(
-        'success' => { 'description' => '', 'schema' => { '$ref' => '#/definitions/UseResponse' } }
+        'success' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } }
       )
     end
   end

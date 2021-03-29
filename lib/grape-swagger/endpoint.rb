@@ -292,7 +292,8 @@ module Grape
         }
         memo[value[:code]][:schema][:required] = [value[:as].to_s] if value[:required]
       else
-        memo[value[:code]][:schema] = build_reference(route, value, response_model, options)
+        ref = build_reference(route, value, response_model, options)
+        memo[value[:code]][:content] = { 'application/json': { schema: ref } }
       end
     end
 

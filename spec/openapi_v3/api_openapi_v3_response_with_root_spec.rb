@@ -68,7 +68,7 @@ describe 'response with root' do
     end
 
     it 'does not add root or array' do
-      schema = subject.dig('paths', '/ordinary_response', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/ordinary_response', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         '$ref' => '#/definitions/Something'
       )
@@ -82,7 +82,7 @@ describe 'response with root' do
     end
 
     it 'adds array to the response' do
-      schema = subject.dig('paths', '/response_with_array', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/response_with_array', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'array', 'items' => { '$ref' => '#/definitions/Something' }
       )
@@ -96,7 +96,7 @@ describe 'response with root' do
     end
 
     it 'adds root to the response' do
-      schema = subject.dig('paths', '/response_with_root', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/response_with_root', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
         'properties' => { 'something' => { '$ref' => '#/definitions/Something' } }
@@ -111,7 +111,7 @@ describe 'response with root' do
     end
 
     it 'adds root to the response' do
-      schema = subject.dig('paths', '/response_with_root_underscore', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/response_with_root_underscore', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
         'properties' => { 'api_error' => { '$ref' => '#/definitions/ApiError' } }
@@ -126,7 +126,7 @@ describe 'response with root' do
     end
 
     it 'adds root and array to the response' do
-      schema = subject.dig('paths', '/response_with_array_and_root', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/response_with_array_and_root', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
         'properties' => {
@@ -143,7 +143,7 @@ describe 'response with root' do
     end
 
     it 'adds root to the response' do
-      schema = subject.dig('paths', '/response_with_custom_root', 'get', 'responses', '200', 'schema')
+      schema = subject.dig('paths', '/response_with_custom_root', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
         'properties' => { 'custom_root' => { '$ref' => '#/definitions/Something' } }

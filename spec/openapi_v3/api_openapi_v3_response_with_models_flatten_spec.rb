@@ -37,15 +37,15 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/use-response']['get']).to eql(
-        "summary"=>"This returns something",
-        "produces"=>["application/json"],
-        "responses"=> {
-          "200"=>{"description"=>"This returns something", "schema"=>{"type"=>"object", "properties"=>{"mock_data"=>{"type"=>"string", "description"=>"it's a mock"}}}},
-          "400"=>{"description"=>"NotFound"},
-          "404"=>{"description"=>"BadRequest", "schema"=>{"type"=>"object", "properties"=>{"mock_data"=>{"type"=>"string", "description"=>"it's a mock"}}}}
+        'summary' => 'This returns something',
+        'produces' => ['application/json'],
+        'responses' => {
+          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } },
+          '400' => { 'description' => 'NotFound' },
+          '404' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } }
         },
-        "tags"=>["use-response"],
-        "operationId"=>"getUseResponse"
+        'tags' => ['use-response'],
+        'operationId' => 'getUseResponse'
       )
     end
   end

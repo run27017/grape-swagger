@@ -61,8 +61,8 @@ describe 'response' do
         'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseItemResponseAsType' } },
-          '400' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseItemResponseAsType' } } } },
+          '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['nested_type'],
         'operationId' => 'getNestedType'
@@ -82,8 +82,8 @@ describe 'response' do
         'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns something', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
-          '400' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
+          '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['entity_response'],
         'operationId' => 'getEntityResponse'
@@ -109,7 +109,7 @@ describe 'response' do
         ],
         'responses' => {
           '201' => { 'description' => 'This returns something' },
-          '400' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['params_given'],
         'operationId' => 'postParamsGiven'
@@ -132,7 +132,7 @@ describe 'response' do
           '200' => { 'description' => 'Request has succeeded' },
           '201' => { 'description' => 'Successful Operation' },
           '204' => { 'description' => 'Request was fulfilled' },
-          '400' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['multiple-success-responses'],
         'operationId' => 'getMultipleSuccessResponses'

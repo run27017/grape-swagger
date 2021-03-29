@@ -73,8 +73,8 @@ describe 'response with examples' do
         'summary' => 'This returns examples',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns examples', 'schema' => { '$ref' => '#/definitions/UseResponse' }, 'examples' => example_200 },
-          '404' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' }, 'examples' => example_404 }
+          '200' => { 'description' => 'This returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } }, 'examples' => example_200 },
+          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } }, 'examples' => example_404 }
         },
         'tags' => ['response_examples'],
         'operationId' => 'getResponseExamples'
@@ -103,9 +103,9 @@ describe 'response with examples' do
         'summary' => 'This syntax also returns examples',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This syntax also returns examples', 'schema' => { '$ref' => '#/definitions/UseResponse' }, 'examples' => example_200 },
-          '404' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' }, 'examples' => example_404 },
-          '400' => { 'description' => 'BadRequest', 'schema' => { '$ref' => '#/definitions/ApiError' }, 'examples' => example_400 }
+          '200' => { 'description' => 'This syntax also returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } }, 'examples' => example_200 },
+          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } }, 'examples' => example_404 },
+          '400' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } }, 'examples' => example_400 }
         },
         'tags' => ['response_failure_examples'],
         'operationId' => 'getResponseFailureExamples'
@@ -124,8 +124,8 @@ describe 'response with examples' do
         'summary' => 'This does not return examples',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This does not return examples', 'schema' => { '$ref' => '#/definitions/UseResponse' } },
-          '404' => { 'description' => 'NotFound', 'schema' => { '$ref' => '#/definitions/ApiError' } }
+          '200' => { 'description' => 'This does not return examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
+          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
         },
         'tags' => ['response_no_examples'],
         'operationId' => 'getResponseNoExamples'
