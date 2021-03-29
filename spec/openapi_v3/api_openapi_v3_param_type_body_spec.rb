@@ -185,7 +185,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
         'type' => 'object',
         'properties' => {
           'data' => {
-            '$ref' => '#/definitions/NestedModule_ApiResponse',
+            'allOf' => ['$ref' => '#/definitions/NestedModule_ApiResponse'],
             'description' => 'request data'
           }
         }

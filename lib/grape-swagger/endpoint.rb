@@ -88,6 +88,9 @@ module Grape
       if options[:models_flatten]
         @paths = make_models_flatten!(@paths, @definitions)
         @definitions = {}
+      else
+        fix_refs_conflicts!(@paths)
+        fix_refs_conflicts!(@definitions)
       end
       [@paths, @definitions]
     end
@@ -457,6 +460,21 @@ module Grape
         object.each { |key, val| make_models_flatten!(val, definitions) }
       elsif object.is_a?(Array)
         object.each { |val| make_models_flatten!(val, definitions) }
+      end
+
+      object
+    end
+
+    def fix_refs_conflicts!(object)
+      if object.is_a?(Hash)
+        object.each { |key, val| fix_refs_conflicts!(val) }
+
+        if object.key?('$ref') && object.length > 1
+          ref = object.delete('$ref')
+          object['allOf'] = ['$ref' => ref]
+        end
+      elsif object.is_a?(Array)
+        object.each { |val| fix_refs_conflicts!(val) }
       end
 
       object
