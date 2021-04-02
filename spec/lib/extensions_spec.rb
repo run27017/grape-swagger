@@ -35,7 +35,7 @@ describe GrapeSwagger::DocMethods::Extensions do
 
       describe 'ref given' do
         let(:path) do
-          { get: { responses: { 200 => { schema: { '$ref' => "#/definitions/#{model}" } } } } }
+          { get: { responses: { 200 => { content: { 'application/json': { schema: { '$ref' => "#/definitions/#{model}" } } } } } } }
         end
         specify do
           definition = subject.find_definition(status, path)
@@ -45,7 +45,7 @@ describe GrapeSwagger::DocMethods::Extensions do
 
       describe 'items given' do
         let(:path) do
-          { get: { responses: { 200 => { schema: { 'items' => { '$ref' => "#/definitions/#{model}" } } } } } }
+          { get: { responses: { 200 => { content: { 'application/json': { schema: { 'items' => { '$ref' => "#/definitions/#{model}" } } } } } } } }
         end
         specify do
           definition = subject.find_definition(status, path)

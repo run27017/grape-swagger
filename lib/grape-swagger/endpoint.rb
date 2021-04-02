@@ -449,7 +449,7 @@ module Grape
         if object.key?('$ref')
           prefix = '#/definitions/'
           unless object['$ref'].start_with?('#/definitions/')
-            raise "$ref value must start with '#{prefix}', but it is '#{object['$ref']}'" 
+            raise "$ref value must start with '#{prefix}', but it is '#{object['$ref']}'"
           end
 
           path = object.delete('$ref')[prefix.length..-1].split('/')
