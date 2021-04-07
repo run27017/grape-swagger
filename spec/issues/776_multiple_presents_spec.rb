@@ -32,7 +32,7 @@ describe '#776 multiple presents spec' do
     JSON.parse(last_response.body)
   end
 
-  let(:definitions) { subject['definitions'] }
+  let(:definitions) { subject['components']['schemas'] }
   let(:schema) { subject['paths']['/issue_776']['get']['responses']['200']['schema'] }
 
   specify { expect(definitions.keys).to include 'EnumValues', 'Something' }
@@ -42,12 +42,12 @@ describe '#776 multiple presents spec' do
       'properties' => {
         'somethings' => {
           'items' => {
-            '$ref' => '#/definitions/Something'
+            '$ref' => '#/components/schemas/Something'
           },
           'type' => 'array'
         },
         'gender' => {
-          '$ref' => '#/definitions/EnumValues'
+          '$ref' => '#/components/schemas/EnumValues'
         }
       },
       'type' => 'object',

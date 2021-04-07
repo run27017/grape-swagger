@@ -30,7 +30,7 @@ describe 'definitions/models' do
   end
 
   specify do
-    expect(subject).to include 'definitions'
-    expect(subject['definitions']).to include(swagger_definitions_models)
+    expect(subject).to include 'components'
+    expect(subject['components']['schemas']).to include(swagger_definitions_models)
   end
 end

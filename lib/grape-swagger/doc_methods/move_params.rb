@@ -105,7 +105,7 @@ module GrapeSwagger
             next if value.blank?
 
             if x == :type && @definitions[value].present?
-              memo['$ref'] = "#/definitions/#{value}"
+              memo['$ref'] = "#/components/schemas/#{value}"
             else
               memo[x] = value
             end
@@ -145,7 +145,7 @@ module GrapeSwagger
             x[:name] = options[:body_name] || name || 'body'
             x[:in] = 'body'
             x[:required] = true
-            x[:schema] = { '$ref' => "#/definitions/#{reference}" }
+            x[:schema] = { '$ref' => "#/components/schemas/#{reference}" }
           end
         end
 

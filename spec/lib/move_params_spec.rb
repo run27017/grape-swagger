@@ -103,7 +103,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         subject.to_definition(path, params, route, definitions)
         expect(params).to eql(
           [
-            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/definitions/postInBody' } }
+            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/components/schemas/postInBody' } }
           ]
         )
         expect(subject.definitions['postInBody']).not_to include :description
@@ -120,7 +120,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         expect(params).to eql(
           [
             { in: 'path', name: 'key', description: nil, type: 'integer', format: 'int32', required: true },
-            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/definitions/putInBody' } }
+            { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/components/schemas/putInBody' } }
           ]
         )
         expect(subject.definitions['putInBody']).not_to include :description
@@ -200,7 +200,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         let(:name) { 'Foo' }
         let(:reference) { 'Bar' }
         let(:expected_param) do
-          { name: name, in: 'body', required: true, schema: { '$ref' => "#/definitions/#{reference}" } }
+          { name: name, in: 'body', required: true, schema: { '$ref' => "#/components/schemas/#{reference}" } }
         end
         specify do
           parameter = subject.send(:build_body_parameter, reference, name, {})
@@ -210,7 +210,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
         describe 'body_name option specified' do
           let(:route_options) { { body_name: 'body' } }
           let(:expected_param) do
-            { name: route_options[:body_name], in: 'body', required: true, schema: { '$ref' => "#/definitions/#{reference}" } }
+            { name: route_options[:body_name], in: 'body', required: true, schema: { '$ref' => "#/components/schemas/#{reference}" } }
           end
           specify do
             parameter = subject.send(:build_body_parameter, reference, name, route_options)
@@ -221,7 +221,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
     end
 
     describe 'parse_model' do
-      let(:ref) { '#/definitions/InBody' }
+      let(:ref) { '#/components/schemas/InBody' }
       describe 'post request' do
         subject(:object) { described_class.send(:parse_model, ref) }
 
@@ -229,7 +229,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
       end
 
       describe 'post request' do
-        let(:put_ref) { '#/definitions/InBody/{id}' }
+        let(:put_ref) { '#/components/schemas/InBody/{id}' }
         subject(:object) { described_class.send(:parse_model, put_ref) }
 
         specify { expect(object).to eql ref }

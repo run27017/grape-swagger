@@ -200,7 +200,7 @@ describe 'openapi spec v3.0' do
       end
 
       describe 'definitions object' do
-        let(:definitions) { subject['definitions'] }
+        let(:definitions) { subject['components']['schemas'] }
 
         specify do
           definitions.each do |model, properties|

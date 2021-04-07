@@ -70,7 +70,7 @@ describe 'response with root' do
     it 'does not add root or array' do
       schema = subject.dig('paths', '/ordinary_response', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
-        '$ref' => '#/definitions/Something'
+        '$ref' => '#/components/schemas/Something'
       )
     end
   end
@@ -84,7 +84,7 @@ describe 'response with root' do
     it 'adds array to the response' do
       schema = subject.dig('paths', '/response_with_array', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
-        'type' => 'array', 'items' => { '$ref' => '#/definitions/Something' }
+        'type' => 'array', 'items' => { '$ref' => '#/components/schemas/Something' }
       )
     end
   end
@@ -99,7 +99,7 @@ describe 'response with root' do
       schema = subject.dig('paths', '/response_with_root', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
-        'properties' => { 'something' => { '$ref' => '#/definitions/Something' } }
+        'properties' => { 'something' => { '$ref' => '#/components/schemas/Something' } }
       )
     end
   end
@@ -114,7 +114,7 @@ describe 'response with root' do
       schema = subject.dig('paths', '/response_with_root_underscore', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
-        'properties' => { 'api_error' => { '$ref' => '#/definitions/ApiError' } }
+        'properties' => { 'api_error' => { '$ref' => '#/components/schemas/ApiError' } }
       )
     end
   end
@@ -130,7 +130,7 @@ describe 'response with root' do
       expect(schema).to eq(
         'type' => 'object',
         'properties' => {
-          'somethings' => { 'type' => 'array', 'items' => { '$ref' => '#/definitions/Something' } }
+          'somethings' => { 'type' => 'array', 'items' => { '$ref' => '#/components/schemas/Something' } }
         }
       )
     end
@@ -146,7 +146,7 @@ describe 'response with root' do
       schema = subject.dig('paths', '/response_with_custom_root', 'get', 'responses', '200', 'content', 'application/json', 'schema')
       expect(schema).to eq(
         'type' => 'object',
-        'properties' => { 'custom_root' => { '$ref' => '#/definitions/Something' } }
+        'properties' => { 'custom_root' => { '$ref' => '#/components/schemas/Something' } }
       )
     end
   end

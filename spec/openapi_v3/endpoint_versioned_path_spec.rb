@@ -82,7 +82,7 @@ describe 'Grape::Endpoint#path_and_definitions' do
       it 'creates a reference to the model instead of using the non-existent type' do
         color = subject.dig(1, 'postV1Item', :properties, :root, :properties, :color)
         expect(color).not_to eq(type: 'ColorEntity')
-        expect(color).to eq('$ref' => '#/definitions/ColorEntity')
+        expect(color).to eq('$ref' => '#/components/schemas/ColorEntity')
       end
     end
   end

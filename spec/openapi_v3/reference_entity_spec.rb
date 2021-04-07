@@ -88,18 +88,18 @@ describe 'referenceEntity' do
         'required' => false
       }]
 
-      expect(subject['definitions'].keys).to include 'SomethingCustom'
-      expect(subject['definitions']['SomethingCustom']).to eq(
+      expect(subject['components']['schemas'].keys).to include 'SomethingCustom'
+      expect(subject['components']['schemas']['SomethingCustom']).to eq(
         'type' => 'object', 'properties' => { 'text' => { 'type' => 'string', 'description' => 'Content of something.' } }
       )
 
-      expect(subject['definitions'].keys).to include 'KindCustom'
-      expect(subject['definitions']['KindCustom']).to eq(
+      expect(subject['components']['schemas'].keys).to include 'KindCustom'
+      expect(subject['components']['schemas']['KindCustom']).to eq(
         'type' => 'object',
         'properties' => {
           'title' => { 'type' => 'string', 'description' => 'Title of the kind.' },
           'something' => {
-            'allOf' => ['$ref' => '#/definitions/SomethingCustom'],
+            'allOf' => ['$ref' => '#/components/schemas/SomethingCustom'],
             'description' => 'Something interesting.'
           }
         }
@@ -114,8 +114,8 @@ describe 'referenceEntity' do
     end
 
     it 'should document specified models' do
-      expect(subject['definitions'].keys).to include 'MyAPI::Child'
-      expect(subject['definitions']['MyAPI::Child']).to eq(
+      expect(subject['components']['schemas'].keys).to include 'MyAPI::Child'
+      expect(subject['components']['schemas']['MyAPI::Child']).to eq(
         'type' => 'object',
         'properties' => {
           'title' => { 'type' => 'string', 'description' => 'Title of the parent.' },

@@ -40,14 +40,14 @@ describe 'response' do
         'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
+          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
           '400' => { 'description' => 'NotFound' },
-          '404' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } }
+          '404' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
         },
         'tags' => ['use-response'],
         'operationId' => 'getUseResponse'
       )
-      expect(subject['definitions']).to eql(swagger_entity_as_response_object)
+      expect(subject['components']['schemas']).to eql(swagger_entity_as_response_object)
     end
   end
 end

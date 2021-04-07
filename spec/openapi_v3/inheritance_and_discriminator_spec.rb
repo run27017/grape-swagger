@@ -45,7 +45,7 @@ describe 'Inheritance and Discriminator' do
 
     subject do
       get '/swagger_doc'
-      JSON.parse(last_response.body)['definitions']
+      JSON.parse(last_response.body)['components']['schemas']
     end
 
     specify do

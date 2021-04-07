@@ -110,9 +110,9 @@ describe 'extensions' do
     end
 
     specify do
-      expect(subject['definitions']['ResponseItem']).to include 'x-some'
-      expect(subject['definitions']['ResponseItem']['x-some']).to eql 'stuff'
-      expect(subject['definitions']['ApiError']).not_to include 'x-some'
+      expect(subject['components']['schemas']['ResponseItem']).to include 'x-some'
+      expect(subject['components']['schemas']['ResponseItem']['x-some']).to eql 'stuff'
+      expect(subject['components']['schemas']['ApiError']).not_to include 'x-some'
     end
   end
 
@@ -123,10 +123,10 @@ describe 'extensions' do
     end
 
     specify do
-      expect(subject['definitions']['OtherItem']).to include 'x-some'
-      expect(subject['definitions']['OtherItem']['x-some']).to eql 'stuff'
-      expect(subject['definitions']['SecondApiError']).to include 'x-other'
-      expect(subject['definitions']['SecondApiError']['x-other']).to eql 'stuff'
+      expect(subject['components']['schemas']['OtherItem']).to include 'x-some'
+      expect(subject['components']['schemas']['OtherItem']['x-some']).to eql 'stuff'
+      expect(subject['components']['schemas']['SecondApiError']).to include 'x-other'
+      expect(subject['components']['schemas']['SecondApiError']['x-other']).to eql 'stuff'
     end
   end
 
@@ -137,9 +137,9 @@ describe 'extensions' do
     end
 
     specify do
-      expect(subject['definitions'].length).to eql 1
-      expect(subject['definitions']['OtherItem']).to include 'x-some'
-      expect(subject['definitions']['OtherItem']['x-some']).to eql 'stuff'
+      expect(subject['components']['schemas'].length).to eql 1
+      expect(subject['components']['schemas']['OtherItem']).to include 'x-some'
+      expect(subject['components']['schemas']['OtherItem']['x-some']).to eql 'stuff'
     end
   end
 end

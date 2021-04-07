@@ -47,18 +47,18 @@ describe 'document hash and array' do
   end
   describe 'generated request definition' do
     it 'has hash' do
-      expect(subject['definitions'].keys).to include('putArbitraryIdIdAndHash')
-      expect(subject['definitions']['putArbitraryIdIdAndHash']['properties'].keys).to include('raw_hash')
+      expect(subject['components']['schemas'].keys).to include('putArbitraryIdIdAndHash')
+      expect(subject['components']['schemas']['putArbitraryIdIdAndHash']['properties'].keys).to include('raw_hash')
     end
 
     it 'has array' do
-      expect(subject['definitions'].keys).to include('putArbitraryIdIdAndHash')
-      expect(subject['definitions']['putArbitraryIdIdAndHash']['properties'].keys).to include('raw_array')
+      expect(subject['components']['schemas'].keys).to include('putArbitraryIdIdAndHash')
+      expect(subject['components']['schemas']['putArbitraryIdIdAndHash']['properties'].keys).to include('raw_array')
     end
 
     it 'does not have the path parameter' do
-      expect(subject['definitions'].keys).to include('putArbitraryIdIdAndHash')
-      expect(subject['definitions']['putArbitraryIdIdAndHash']).to_not include('id')
+      expect(subject['components']['schemas'].keys).to include('putArbitraryIdIdAndHash')
+      expect(subject['components']['schemas']['putArbitraryIdIdAndHash']).to_not include('id')
     end
   end
 end

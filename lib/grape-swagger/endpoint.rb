@@ -319,7 +319,7 @@ module Grape
     end
 
     def build_reference_hash(response_model)
-      { '$ref' => "#/definitions/#{response_model}" }
+      { '$ref' => "#/components/schemas/#{response_model}" }
     end
 
     def build_reference_array(reference)
@@ -447,8 +447,8 @@ module Grape
     def make_models_flatten!(object, definitions)
       if object.is_a?(Hash)
         if object.key?('$ref')
-          prefix = '#/definitions/'
-          unless object['$ref'].start_with?('#/definitions/')
+          prefix = '#/components/schemas/'
+          unless object['$ref'].start_with?('#/components/schemas/')
             raise "$ref value must start with '#{prefix}', but it is '#{object['$ref']}'"
           end
 

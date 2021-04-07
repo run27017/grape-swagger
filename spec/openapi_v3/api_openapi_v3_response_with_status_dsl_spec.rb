@@ -45,14 +45,14 @@ describe 'response' do
     specify do
       responses = subject['paths']['/use-status-dsl']['get']['responses']
       expect(responses).to include(
-        '200' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } },
+        '200' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
         '204' => { 'description' => 'no content' },
-        '400' => { 'description' => 'bad request', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/ApiError' } } } },
+        '400' => { 'description' => 'bad request', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } },
         '404' => { 'description' => 'not found', 'content' => { 'application/json' => { 'schema' => { '$ref' => a_string_matching(%r{Class_\w+}) } } } }
       )
 
-      expect(subject['definitions']).to include(swagger_entity_as_response_object)
-      expect(subject['definitions'].keys).to include(a_string_matching(/Class_\w+/))
+      expect(subject['components']['schemas']).to include(swagger_entity_as_response_object)
+      expect(subject['components']['schemas'].keys).to include(a_string_matching(/Class_\w+/))
     end
   end
 
@@ -65,7 +65,7 @@ describe 'response' do
     specify do
       responses = subject['paths']['/use-success-dsl']['get']['responses']
       expect(responses).to include(
-        'success' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/definitions/UseResponse' } } } }
+        'success' => { 'description' => '', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } }
       )
     end
   end
