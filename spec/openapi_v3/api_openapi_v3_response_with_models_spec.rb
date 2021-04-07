@@ -13,8 +13,8 @@ describe 'response' do
         desc 'This returns something',
              success: [{ code: 200 }],
              failure: [
-               { code: 400, message: 'NotFound', model: '' },
-               { code: 404, message: 'BadRequest', model: Entities::ApiError }
+               { code: 400, message: 'BadRequest', model: '' },
+               { code: 404, message: 'NotFound', model: Entities::ApiError }
              ]
         get '/use-response' do
           { 'declared_params' => declared(params) }
@@ -40,9 +40,9 @@ describe 'response' do
         'summary' => 'This returns something',
         'produces' => ['application/json'],
         'responses' => {
-          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
-          '400' => { 'description' => 'NotFound' },
-          '404' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
+          '200' => { 'description' => 'This returns something' },
+          '400' => { 'description' => 'BadRequest' },
+          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
         },
         'tags' => ['use-response'],
         'operationId' => 'getUseResponse'

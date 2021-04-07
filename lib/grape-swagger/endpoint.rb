@@ -65,7 +65,6 @@ module Grape
       }.delete_if { |_, value| value.blank? }
     end
 
-    # contact
     def contact_object(infos)
       {
         name: infos.delete(:contact_name),
@@ -74,7 +73,6 @@ module Grape
       }.delete_if { |_, value| value.blank? }
     end
 
-    # building path and definitions objects
     def path_and_definition_objects(namespace_routes, options)
       return [@paths, @definitions] if @paths
 
@@ -85,13 +83,8 @@ module Grape
         path_item(routes, options)
       end
 
-      if options[:models_flatten]
-        @paths = make_models_flatten!(@paths, @definitions)
-        @definitions = {}
-      else
-        fix_refs_conflicts!(@paths)
-        fix_refs_conflicts!(@definitions)
-      end
+      fix_refs_conflicts!(@paths)
+      fix_refs_conflicts!(@definitions)
       [@paths, @definitions]
     end
 
@@ -101,7 +94,6 @@ module Grape
       models.each { |x| expose_params_from_model(x) }
     end
 
-    # path object
     def path_item(routes, options)
       routes.each do |route|
         next if hidden?(route, options)
@@ -199,7 +191,7 @@ module Grape
       end
 
       if GrapeSwagger::DocMethods::MoveParams.can_be_moved?(route.request_method, parameters)
-        parameters = GrapeSwagger::DocMethods::MoveParams.to_definition(path, parameters, route, @definitions)
+        parameters = GrapeSwagger::DocMethods::MoveParams.to_definition(path, parameters, route, @definitions, options)
       end
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
@@ -221,14 +213,20 @@ module Grape
           next
         end
 
-        # Explicitly request no model with { model: '' }
-        next if value[:model] == ''
+        # Discard if model is empty
+        next if value[:model].nil? || value[:model] == ''
 
-        response_model = value[:model] ? expose_params_from_model(value[:model]) : @item
-        next unless @definitions[response_model]
-        next if response_model.start_with?('Swagger_doc')
-
-        build_memo_schema(memo, route, value, response_model, options)
+        # TODO: catch invalid constant error
+        if options[:models_flatten]
+          model = value[:model] || @item
+          schema = parse_model(model, model_name(model), @definitions)
+          memo[value[:code]][:content] = { 'application/json': { schema: schema } }
+        else
+          response_model = value[:model] ? expose_params_from_model(value[:model]) : @item
+          next unless @definitions[response_model]
+          next if response_model.start_with?('Swagger_doc')
+          build_memo_schema(memo, route, value, response_model, options)
+        end
         memo[value[:code]][:examples] = value[:examples] if value[:examples]
       end
     end
@@ -383,22 +381,25 @@ module Grape
     end
 
     def expose_params_from_model(model)
-      model = model.is_a?(String) ? model.constantize : model
       model_name = model_name(model)
 
       return model_name if @definitions.key?(model_name)
 
-      @definitions[model_name] = nil
+      @definitions[model_name] = parse_model(model, model_name, @definitions)
+      model_name
+    end
+
+    def parse_model(model, model_name, schemas)
+      return schemas[model_name] if schemas.key?(model_name)
+
+      model = model.is_a?(String) ? model.constantize : model
 
       parser = GrapeSwagger.model_parsers.find(model)
       raise GrapeSwagger::Errors::UnregisteredParser, "No parser registered for #{model_name}." unless parser
 
       parsed_response = parser.new(model, self).call
 
-      @definitions[model_name] =
-        GrapeSwagger::DocMethods::BuildModelDefinition.parse_params_from_model(parsed_response, model, model_name)
-
-      model_name
+      GrapeSwagger::DocMethods::BuildModelDefinition.parse_params_from_model(parsed_response, model, model_name)
     end
 
     def model_name(name)

@@ -12,8 +12,9 @@ module GrapeSwagger
           move_methods.include?(http_verb) && includes_body_param?(params)
         end
 
-        def to_definition(path, params, route, definitions)
+        def to_definition(path, params, route, definitions, options={})
           @definitions = definitions
+          @options = options
           unify!(params)
 
           params_to_move = movable_params(params)
@@ -38,13 +39,17 @@ module GrapeSwagger
         end
 
         def parent_definition_of_params(params, path, route)
-          definition_name = OperationId.manipulate(parse_model(path))
-          referenced_definition = build_definition(definition_name, params, route.request_method.downcase)
-          definition = @definitions[referenced_definition]
+          schema = build_schema(params)
 
-          move_params_to_new(definition, params)
-
-          build_body_parameter(referenced_definition, 'body', route.options)
+          unless @options[:models_flatten]
+            definition_name = OperationId.manipulate(parse_model(path))
+            verb = route.request_method.downcase
+            definition_name = "#{verb}#{definition_name}" if verb
+            @definitions[definition_name] = schema
+            schema = definition_name
+          end
+          
+          build_body_parameter(schema, 'body', route.options)
         end
 
         def move_params_to_new(definition, params)
@@ -140,12 +145,14 @@ module GrapeSwagger
           definition[:required].push(*value)
         end
 
-        def build_body_parameter(reference, name, options)
+        def build_body_parameter(schema, name, options)
+          schema = { '$ref' => "#/components/schemas/#{schema}" } if schema.is_a?(String)
+
           {}.tap do |x|
             x[:name] = options[:body_name] || name || 'body'
             x[:in] = 'body'
             x[:required] = true
-            x[:schema] = { '$ref' => "#/components/schemas/#{reference}" }
+            x[:schema] = schema
           end
         end
 
@@ -154,6 +161,12 @@ module GrapeSwagger
           @definitions[name] = should_expose_as_array?(params) ? array_type : object_type
 
           name
+        end
+
+        def build_schema(params)
+          definition = should_expose_as_array?(params) ? array_type : object_type
+          move_params_to_new(definition, params)
+          definition
         end
 
         def array_type

@@ -15,7 +15,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
             optional :in_body_2, type: String, documentation: { desc: 'in_body_2', param_type: 'body' }
             optional :in_body_3, type: String, documentation: { desc: 'in_body_3', param_type: 'body' }
           end
-
           post '/in_body' do
             { 'declared_params' => declared(params) }
           end
@@ -27,7 +26,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
             optional :in_body_2, type: String, documentation: { desc: 'in_body_2', param_type: 'body' }
             optional :in_body_3, type: String, documentation: { desc: 'in_body_3', param_type: 'body' }
           end
-
           put '/in_body/:key' do
             { 'declared_params' => declared(params) }
           end
@@ -39,7 +37,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
           params do
             requires :name, type: String, documentation: { desc: 'name', param_type: 'body' }
           end
-
           post '/in_body' do
             { 'declared_params' => declared(params) }
           end
@@ -50,7 +47,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
             requires :id, type: Integer
             optional :name, type: String, documentation: { desc: 'name', param_type: 'body' }
           end
-
           put '/in_body/:id' do
             { 'declared_params' => declared(params) }
           end
@@ -61,7 +57,6 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
           params do
             optional :data, type: ::Entities::NestedModule::ApiResponse, documentation: { desc: 'request data' }
           end
-
           post do
             { 'declared_params' => declared(params) }
           end
