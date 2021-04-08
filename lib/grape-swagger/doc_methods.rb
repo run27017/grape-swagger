@@ -38,8 +38,10 @@ module GrapeSwagger
         specific_api_documentation: { desc: 'Swagger compatible API description for specific API' },
         endpoint_auth_wrapper: nil,
         swagger_endpoint_guard: nil,
-        token_owner: nil
-      }.freeze
+        token_owner: nil,
+        models_flatten: true,
+        use_request_body: true
+      }
 
     FORMATTER_METHOD = %i[format default_format default_error_formatter].freeze
 

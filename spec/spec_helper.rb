@@ -42,4 +42,6 @@ RSpec.configure do |config|
   config.seed = 40_834
 end
 
+GrapeSwagger::DocMethods::DEFAULTS.merge!(models_flatten: false, use_request_body: false)
+
 require 'pry'
