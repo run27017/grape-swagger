@@ -119,7 +119,7 @@ module Grape
       method[:description] = description_object(route)
       method[:produces]    = produces_object(route, options[:produces] || options[:format])
       method[:consumes]    = consumes_object(route, options[:format])
-      method[:parameters]  = params_object(route, options, path)
+      method[:parameters], method[:requestBody]  = params_and_request_body_object(route, options, path)
       method[:security]    = security_object(route)
       method[:responses]   = response_object(route, options)
       method[:tags]        = route.options.fetch(:tags, tag_object(route, path))
@@ -175,7 +175,7 @@ module Grape
       GrapeSwagger::DocMethods::ProducesConsumes.call(route.settings.dig(:description, :consumes) || format)
     end
 
-    def params_object(route, options, path)
+    def params_and_request_body_object(route, options, path)
       parameters = build_request_params(route, options).each_with_object([]) do |(param, value), memo|
         next if hidden_parameter?(value)
 
@@ -191,12 +191,12 @@ module Grape
       end
 
       if GrapeSwagger::DocMethods::MoveParams.can_be_moved?(route.request_method, parameters)
-        parameters = GrapeSwagger::DocMethods::MoveParams.to_definition(path, parameters, route, @definitions, options)
+        parameters, requestBody = GrapeSwagger::DocMethods::MoveParams.to_params_and_request_body(path, parameters, route, @definitions, options)
       end
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
 
-      parameters.presence
+      [parameters.presence, requestBody]
     end
 
     def response_object(route, options)

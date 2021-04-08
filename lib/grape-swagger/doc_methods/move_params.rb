@@ -12,18 +12,28 @@ module GrapeSwagger
           move_methods.include?(http_verb) && includes_body_param?(params)
         end
 
-        def to_definition(path, params, route, definitions, options={})
+        def to_params_and_request_body(path, params, route, definitions, options={})
           @definitions = definitions
           @options = options
           unify!(params)
 
           params_to_move = movable_params(params)
 
-          return (params + correct_array_param(params_to_move)) if should_correct_array?(params_to_move)
+          bodyParams = should_correct_array?(params_to_move) ?
+            correct_array_param(params_to_move)[0] : parent_definition_of_params(params_to_move, path, route)
 
-          params << parent_definition_of_params(params_to_move, path, route)
-
-          params
+          if @options[:use_request_body]
+            [params, {
+              content: {
+                'application/json': {
+                  schema: bodyParams[:schema]
+                }
+              }
+            }]
+          else
+            params << bodyParams
+            [params, nil]
+          end
         end
 
         private

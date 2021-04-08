@@ -100,7 +100,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
       let(:route) { Grape::Router::Route.new('POST', path.dup, **route_options) }
 
       specify do
-        subject.to_definition(path, params, route, definitions)
+        subject.to_params_and_request_body(path, params, route, definitions)
         expect(params).to eql(
           [
             { name: 'body', in: 'body', required: true, schema: { '$ref' => '#/components/schemas/postInBody' } }
@@ -116,7 +116,7 @@ describe GrapeSwagger::DocMethods::MoveParams do
       let(:route) { Grape::Router::Route.new('PUT', path.dup, **route_options) }
 
       specify do
-        subject.to_definition(path, params, route, definitions)
+        subject.to_params_and_request_body(path, params, route, definitions)
         expect(params).to eql(
           [
             { in: 'path', name: 'key', description: nil, type: 'integer', format: 'int32', required: true },
