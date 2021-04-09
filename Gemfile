@@ -37,7 +37,5 @@ group :test do
   gem 'ruby-grape-danger', '~> 0.1.1', require: false
   gem 'simplecov', require: false
 
-  unless ENV['MODEL_PARSER'] == 'grape-swagger-entity'
-    gem 'grape-swagger-entity', git: 'https://github.com/ruby-grape/grape-swagger-entity'
-  end
+  gem 'grape-swagger-entity', path: '../grape-swagger-entity'
 end
