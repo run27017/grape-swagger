@@ -46,7 +46,6 @@ describe 'a hide mounted api' do
     expect(subject).to eq(
       'info' => { 'title' => 'API title', 'version' => '0.0.1' },
       'openapi' => '3.0.0',
-      'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
       'host' => 'example.org',
       'tags' => [{ 'name' => 'simple', 'description' => 'Operations about simples' }, { 'name' => 'lazy', 'description' => 'Operations about lazies' }],
       'paths' => {
@@ -107,7 +106,6 @@ describe 'a hide mounted api with same namespace' do
     expect(JSON.parse(last_response.body)).to eq(
       'info' => { 'title' => 'API title', 'version' => '0.0.1' },
       'openapi' => '3.0.0',
-      'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
       'host' => 'example.org',
       'tags' => [{ 'name' => 'simple', 'description' => 'Operations about simples' }],
       'paths' => {
@@ -128,7 +126,6 @@ describe 'a hide mounted api with same namespace' do
     expect(JSON.parse(last_response.body)).to eq(
       'info' => { 'title' => 'API title', 'version' => '0.0.1' },
       'openapi' => '3.0.0',
-      'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
       'host' => 'example.org',
       'tags' => [{ 'name' => 'simple', 'description' => 'Operations about simples' }],
       'paths' => {

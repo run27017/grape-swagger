@@ -198,7 +198,6 @@ RSpec.shared_context 'mock swagger example' do
         'version' => '0.0.1'
       },
       'openapi' => '3.0.0',
-      'produces' => ['application/json'],
       'host' => 'example.org',
       'basePath' => '/api',
       'tags' => [

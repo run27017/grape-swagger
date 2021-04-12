@@ -25,7 +25,6 @@ describe 'Default API' do
       expect(subject).to eq(
         'info' => { 'title' => 'API title', 'version' => '0.0.1' },
         'openapi' => '3.0.0',
-        'produces' => ['application/json'],
         'host' => 'example.org',
         'tags' => [{ 'name' => 'something', 'description' => 'Operations about somethings' }],
         'paths' => {
@@ -71,7 +70,6 @@ describe 'Default API' do
     it 'documents endpoint' do
       expect(subject).to eq('info' => { 'title' => 'API title', 'version' => '0.0.1' },
                             'openapi' => '3.0.0',
-                            'produces' => ['application/json'],
                             'host' => 'example.org',
                             'tags' => [{ 'name' => 'something', 'description' => 'Operations about somethings' }],
                             'paths' => {

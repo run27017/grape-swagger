@@ -27,7 +27,7 @@ module Grape
       object = {
         openapi: '3.0.0',
         info: info_object(options[:info].merge(version: options[:doc_version])),
-        produces: content_types_for(target_class),
+        # produces: content_types_for(target_class),
         authorizations: options[:authorizations],
         securityDefinitions: options[:security_definitions],
         security: options[:security],
