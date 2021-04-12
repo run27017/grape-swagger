@@ -210,7 +210,6 @@ RSpec.shared_context 'mock swagger example' do
         '/v3/other_thing/{elements}' => {
           'get' => {
             'summary' => 'nested route inside namespace',
-            'produces' => ['application/json'],
             'parameters' => [{ 'in' => 'body', 'name' => 'elements', 'description' => 'Set of configuration', 'type' => 'array', 'items' => { 'type' => 'string' }, 'required' => true }],
             'responses' => { '200' => { 'description' => 'nested route inside namespace', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/QueryInput' } } } } },
             'tags' => ['other_thing'],
@@ -222,7 +221,6 @@ RSpec.shared_context 'mock swagger example' do
         '/thing' => {
           'get' => {
             'summary' => 'This gets Things.',
-            'produces' => ['application/json'],
             'parameters' => [
               { 'in' => 'query', 'name' => 'id', 'description' => 'Identity of Something', 'type' => 'integer', 'format' => 'int32', 'required' => false },
               { 'in' => 'query', 'name' => 'text', 'description' => 'Content of something.', 'type' => 'string', 'required' => false },
@@ -235,8 +233,6 @@ RSpec.shared_context 'mock swagger example' do
           },
           'post' => {
             'summary' => 'This creates Thing.',
-            'produces' => ['application/json'],
-            'consumes' => ['application/json'],
             'parameters' => [
               { 'in' => 'formData', 'name' => 'text', 'description' => 'Content of something.', 'type' => 'string', 'required' => true },
               { 'in' => 'formData', 'name' => 'links', 'type' => 'array', 'items' => { 'type' => 'string' }, 'required' => true }
@@ -249,7 +245,6 @@ RSpec.shared_context 'mock swagger example' do
         '/thing/{id}' => {
           'get' => {
             'summary' => 'This gets Thing.',
-            'produces' => ['application/json'],
             'parameters' => [{ 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true }],
             'responses' => { '200' => { 'description' => 'getting a single thing' }, '401' => { 'description' => 'Unauthorized' } },
             'tags' => ['thing'],
@@ -257,8 +252,6 @@ RSpec.shared_context 'mock swagger example' do
           },
           'put' => {
             'summary' => 'This updates Thing.',
-            'produces' => ['application/json'],
-            'consumes' => ['application/json'],
             'parameters' => [
               { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
               { 'in' => 'formData', 'name' => 'text', 'description' => 'Content of something.', 'type' => 'string', 'required' => false },
@@ -270,7 +263,6 @@ RSpec.shared_context 'mock swagger example' do
           },
           'delete' => {
             'summary' => 'This deletes Thing.',
-            'produces' => ['application/json'],
             'parameters' => [{ 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true }],
             'responses' => { '200' => { 'description' => 'This deletes Thing.', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/Something' } } } } },
             'tags' => ['thing'],
@@ -280,7 +272,6 @@ RSpec.shared_context 'mock swagger example' do
         '/thing2' => {
           'get' => {
             'summary' => 'This gets Things.',
-            'produces' => ['application/json'],
             'responses' => { '200' => { 'description' => 'get Horses', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/Something' } } } }, '401' => { 'description' => 'HorsesOutError', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } } },
             'tags' => ['thing2'],
             'operationId' => 'getThing2'
@@ -289,7 +280,6 @@ RSpec.shared_context 'mock swagger example' do
         '/dummy/{id}' => {
           'delete' => {
             'summary' => 'dummy route.',
-            'produces' => ['application/json'],
             'parameters' => [{ 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true }],
             'responses' => { '204' => { 'description' => 'dummy route.' }, '401' => { 'description' => 'Unauthorized' } },
             'tags' => ['dummy'],

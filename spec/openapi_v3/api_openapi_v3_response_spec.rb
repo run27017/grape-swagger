@@ -59,7 +59,6 @@ describe 'response' do
     specify do
       expect(subject['paths']['/nested_type']['get']).to eql(
         'summary' => 'This returns something',
-        'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseItemResponseAsType' } } } },
           '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
@@ -80,7 +79,6 @@ describe 'response' do
     specify do
       expect(subject['paths']['/entity_response']['get']).to eql(
         'summary' => 'This returns something',
-        'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
           '400' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
@@ -101,8 +99,6 @@ describe 'response' do
     specify do
       expect(subject['paths']['/params_given']['post']).to eql(
         'summary' => 'This returns something',
-        'produces' => ['application/json'],
-        'consumes' => ['application/json'],
         'parameters' => [
           { 'in' => 'formData', 'name' => 'description', 'type' => 'string', 'required' => false },
           { 'in' => 'formData', 'name' => '$responses', 'type' => 'array', 'items' => { 'type' => 'string' }, 'required' => false }
@@ -127,7 +123,6 @@ describe 'response' do
     specify do
       expect(subject['paths']['/multiple-success-responses']['get']).to eql(
         'summary' => 'This returns something',
-        'produces' => ['application/json'],
         'responses' => {
           '200' => { 'description' => 'Request has succeeded' },
           '201' => { 'description' => 'Successful Operation' },

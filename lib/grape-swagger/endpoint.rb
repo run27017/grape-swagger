@@ -117,8 +117,8 @@ module Grape
       method = {}
       method[:summary]     = summary_object(route)
       method[:description] = description_object(route)
-      method[:produces]    = produces_object(route, options[:produces] || options[:format])
-      method[:consumes]    = consumes_object(route, options[:format])
+      # method[:produces]    = produces_object(route, options[:produces] || options[:format])
+      # method[:consumes]    = consumes_object(route, options[:format])
       method[:parameters], method[:requestBody]  = params_and_request_body_object(route, options, path)
       method[:security]    = security_object(route)
       method[:responses]   = response_object(route, options)

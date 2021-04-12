@@ -69,15 +69,9 @@ describe 'response with examples' do
     end
 
     specify do
-      expect(subject['paths']['/response_examples']['get']).to eql(
-        'summary' => 'This returns examples',
-        'produces' => ['application/json'],
-        'responses' => {
-          '200' => { 'description' => 'This returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'examples' => example_200 },
-          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_404 }
-        },
-        'tags' => ['response_examples'],
-        'operationId' => 'getResponseExamples'
+      expect(subject['paths']['/response_examples']['get']['responses']).to eql(
+        '200' => { 'description' => 'This returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'examples' => example_200 },
+        '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_404 }
       )
     end
   end
@@ -99,16 +93,10 @@ describe 'response with examples' do
     end
 
     specify do
-      expect(subject['paths']['/response_failure_examples']['get']).to eql(
-        'summary' => 'This syntax also returns examples',
-        'produces' => ['application/json'],
-        'responses' => {
-          '200' => { 'description' => 'This syntax also returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'examples' => example_200 },
-          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_404 },
-          '400' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_400 }
-        },
-        'tags' => ['response_failure_examples'],
-        'operationId' => 'getResponseFailureExamples'
+      expect(subject['paths']['/response_failure_examples']['get']['responses']).to eql(
+        '200' => { 'description' => 'This syntax also returns examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'examples' => example_200 },
+        '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_404 },
+        '400' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => example_400 }
       )
     end
   end
@@ -120,15 +108,9 @@ describe 'response with examples' do
     end
 
     specify do
-      expect(subject['paths']['/response_no_examples']['get']).to eql(
-        'summary' => 'This does not return examples',
-        'produces' => ['application/json'],
-        'responses' => {
-          '200' => { 'description' => 'This does not return examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
-          '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
-        },
-        'tags' => ['response_no_examples'],
-        'operationId' => 'getResponseNoExamples'
+      expect(subject['paths']['/response_no_examples']['get']['responses']).to eql(
+        '200' => { 'description' => 'This does not return examples', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
+        '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }
       )
     end
   end
