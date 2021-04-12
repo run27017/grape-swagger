@@ -222,7 +222,7 @@ module Grape
           schema = parse_model(model, model_name(model), @definitions)
           memo[value[:code]][:content] = { 'application/json': { schema: schema } }
         else
-          response_model = value[:model] ? expose_params_from_model(value[:model]) : @item
+          response_model = value[:model] ? parse_model_into_definition(value[:model]) : @item
           next unless @definitions[response_model]
           next if response_model.start_with?('Swagger_doc')
           build_memo_schema(memo, route, value, response_model, options)
@@ -381,6 +381,25 @@ module Grape
     end
 
     def expose_params_from_model(model)
+      model = model.is_a?(String) ? model.constantize : model
+      model_name = model_name(model)
+
+      return model_name if @definitions.key?(model_name)
+
+      @definitions[model_name] = nil
+
+      parser = GrapeSwagger.model_parsers.find(model)
+      raise GrapeSwagger::Errors::UnregisteredParser, "No parser registered for #{model_name}." unless parser
+
+      parsed_response = parser.new(model, self).call
+
+      @definitions[model_name] =
+        GrapeSwagger::DocMethods::BuildModelDefinition.parse_params_from_model(parsed_response, model, model_name)
+
+      model_name
+    end
+
+    def parse_model_into_definition(model)
       model_name = model_name(model)
 
       return model_name if @definitions.key?(model_name)
