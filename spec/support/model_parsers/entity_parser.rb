@@ -196,7 +196,7 @@ RSpec.shared_context 'entity swagger example' do
       },
       'openapi' => '3.0.0',
       'produces' => ['application/json'],
-      'host' => 'example.org',
+      'servers' => [{ 'url' => 'example.org' }],
       'basePath' => '/api',
       'tags' => [
         { 'name' => 'other_thing', 'description' => 'Operations about other_things' },

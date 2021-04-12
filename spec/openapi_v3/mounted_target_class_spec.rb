@@ -34,7 +34,7 @@ xdescribe 'docs mounted separately from api' do
       'info' => { 'title' => 'API title', 'version' => '0.0.1' },
       'openapi' => '3.0.0',
       'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
-      'host' => 'example.org',
+      'servers' => [{ 'url' => 'example.org' }],
       'tags' => [{ 'name' => 'simple', 'description' => 'Operations about simples' }],
       'paths' => {
         '/simple' => {
@@ -57,7 +57,7 @@ xdescribe 'docs mounted separately from api' do
       'openapi' => '3.0.0',
       'tags' => [{ 'name' => 'simple', 'description' => 'Operations about simples' }],
       'produces' => ['application/xml', 'application/json', 'application/octet-stream', 'text/plain'],
-      'host' => 'example.org',
+      'servers' => [{ 'url' => 'example.org' }],
       'paths' => {
         '/simple' => {
           'get' => {

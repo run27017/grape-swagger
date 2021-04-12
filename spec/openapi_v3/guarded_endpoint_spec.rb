@@ -86,7 +86,7 @@ describe 'a guarded api endpoint' do
         expect(subject).to eq(
           'info' => { 'title' => 'API title', 'version' => '0.0.1' },
           'openapi' => '3.0.0',
-          'host' => 'example.org',
+          'servers' => [{ 'url' => 'example.org' }],
           'tags' => [{ 'name' => 'auth', 'description' => 'Operations about auths' }],
           'paths' => {
             '/auth' => {
@@ -110,7 +110,7 @@ describe 'a guarded api endpoint' do
         expect(subject).to eq(
           'info' => { 'title' => 'API title', 'version' => '0.0.1' },
           'openapi' => '3.0.0',
-          'host' => 'example.org'
+          'servers' => [{ 'url' => 'example.org' }]
         )
       end
     end
@@ -126,7 +126,7 @@ describe 'a guarded api endpoint' do
         expect(subject).to eq(
           'info' => { 'title' => 'API title', 'version' => '0.0.1' },
           'openapi' => '3.0.0',
-          'host' => 'example.org',
+          'servers' => [{ 'url' => 'example.org' }],
           'tags' => [{ 'name' => 'auth', 'description' => 'Operations about auths' }],
           'paths' => {
             '/auth' => {
@@ -150,7 +150,7 @@ describe 'a guarded api endpoint' do
         expect(subject).to eq(
           'info' => { 'title' => 'API title', 'version' => '0.0.1' },
           'openapi' => '3.0.0',
-          'host' => 'example.org'
+          'servers' => [{ 'url' => 'example.org' }]
         )
       end
     end

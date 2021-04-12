@@ -44,7 +44,7 @@ describe 'global configuration stuff' do
 
     specify do
       expect(subject['info']['version']).to eql '23'
-      expect(subject['host']).to eql 'another.host.com'
+      expect(subject['servers'][0]['url']).to eql 'another.host.com'
       expect(subject['basePath']).to eql 'somewhere/over/the/rainbow'
       expect(subject['paths'].keys.first).to eql '/somewhere/over/the/rainbow/v3/configuration'
       expect(subject['schemes']).to eql ['https']

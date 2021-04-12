@@ -198,7 +198,7 @@ RSpec.shared_context 'mock swagger example' do
         'version' => '0.0.1'
       },
       'openapi' => '3.0.0',
-      'host' => 'example.org',
+      'servers' => [{ 'url' => 'example.org' }],
       'basePath' => '/api',
       'tags' => [
         { 'name' => 'other_thing', 'description' => 'Operations about other_things' },

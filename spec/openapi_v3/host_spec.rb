@@ -24,7 +24,7 @@ describe 'host in the swagger_doc' do
     end
 
     specify do
-      expect(subject['host']).to eq 'example.com:8080'
+      expect(subject['servers'][0]['url']).to eq 'example.com:8080'
     end
   end
 
@@ -37,7 +37,7 @@ describe 'host in the swagger_doc' do
     end
 
     specify do
-      expect(subject['host']).to eq 'real.example.com'
+      expect(subject['servers'][0]['url']).to eq 'real.example.com'
     end
   end
 end
