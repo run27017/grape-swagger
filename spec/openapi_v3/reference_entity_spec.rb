@@ -84,7 +84,9 @@ describe 'referenceEntity' do
         'in' => 'query',
         'name' => 'something',
         'description' => 'Something interesting.',
-        'type' => 'SomethingCustom',
+        'schema' => {
+          'type' => 'SomethingCustom'
+        },
         'required' => false
       }]
 

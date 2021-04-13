@@ -55,10 +55,10 @@ describe 'nested group params' do
         specify do
           expect(subject['paths']['/nested_array']['post']['parameters']).to eql(
             [
-              { 'in' => 'formData', 'name' => "a_array#{braces}[param_1]", 'required' => true, 'type' => 'array', 'items' => { 'type' => 'integer', 'format' => 'int32' } },
-              { 'in' => 'formData', 'name' => "a_array#{braces}[b_array]#{braces}[param_2]", 'required' => true, 'type' => 'array', 'items' => { 'type' => 'string' } },
-              { 'in' => 'formData', 'name' => "a_array#{braces}[c_hash][param_3]", 'required' => true, 'type' => 'array', 'items' => { 'type' => 'string' } },
-              { 'in' => 'formData', 'name' => 'a_array_foo', 'required' => true, 'type' => 'string' }
+              { 'in' => 'formData', 'name' => "a_array#{braces}[param_1]", 'required' => true, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'integer', 'format' => 'int32' } } },
+              { 'in' => 'formData', 'name' => "a_array#{braces}[b_array]#{braces}[param_2]", 'required' => true, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'string' } } },
+              { 'in' => 'formData', 'name' => "a_array#{braces}[c_hash][param_3]", 'required' => true, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'string' } } },
+              { 'in' => 'formData', 'name' => 'a_array_foo', 'required' => true, 'schema' => { 'type' => 'string' } }
             ]
           )
         end
@@ -73,10 +73,10 @@ describe 'nested group params' do
         specify do
           expect(subject['paths']['/nested_hash']['post']['parameters']).to eql(
             [
-              { 'in' => 'formData', 'name' => 'a_hash[param_1]', 'required' => true, 'type' => 'integer', 'format' => 'int32' },
-              { 'in' => 'formData', 'name' => 'a_hash[b_hash][param_2]', 'required' => true, 'type' => 'string' },
-              { 'in' => 'formData', 'name' => "a_hash[c_array]#{braces}[param_3]", 'required' => true, 'type' => 'array', 'items' => { 'type' => 'string' } },
-              { 'in' => 'formData', 'name' => 'a_hash_foo', 'required' => true, 'type' => 'string' }
+              { 'in' => 'formData', 'name' => 'a_hash[param_1]', 'required' => true, 'schema' => { 'type' => 'integer', 'format' => 'int32' } },
+              { 'in' => 'formData', 'name' => 'a_hash[b_hash][param_2]', 'required' => true, 'schema' => { 'type' => 'string' } },
+              { 'in' => 'formData', 'name' => "a_hash[c_array]#{braces}[param_3]", 'required' => true, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'string' } } },
+              { 'in' => 'formData', 'name' => 'a_hash_foo', 'required' => true, 'schema' => { 'type' => 'string' } }
             ]
           )
         end

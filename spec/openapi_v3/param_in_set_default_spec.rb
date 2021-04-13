@@ -39,7 +39,7 @@ describe 'setting of param type, such as `query`, `path`, `formData`, `body`, `h
     specify do
       expect(subject['paths']['/wo_entities/in_body']['post']['parameters']).to eql(
         [
-          { "format"=>"int32", "in"=>"query", "name"=>"in_query", "required"=>false, "type"=>"integer" },
+          { "in"=>"query", "name"=>"in_query", "required"=>false, 'schema' => { "type"=>"integer", "format"=>"int32" } },
           { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/components/schemas/postWoEntitiesInBody' } }
         ]
       )

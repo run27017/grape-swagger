@@ -11,6 +11,17 @@ module GrapeSwagger
             end
             parameters.reject! { |p| p[:name] == b[:name] } if move_down(b, related_parameters)
           end
+
+          parameters
+        end
+
+        def move_to_schema(parameters)
+          parameters.reject { |parameter| parameter[:in] == 'body' }.each do |b|
+            schema = {}
+            %i[type format items].each { |key| schema[key] = b.delete(key) if b.key?(key) }
+            b.merge!(schema: schema)
+          end
+
           parameters
         end
 

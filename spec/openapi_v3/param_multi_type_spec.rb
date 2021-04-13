@@ -35,13 +35,17 @@ describe 'Params Multi Types' do
       {
         'in' => 'formData',
         'name' => 'input',
-        'type' => 'string',
+        'schema' => {
+          'type' => 'string'
+        },
         'required' => true
       },
       {
         'in' => 'formData',
         'name' => 'another_input',
-        'type' => 'string',
+        'schema' => {
+          'type' => 'string'
+        },
         'required' => true
       }
     ]
@@ -70,7 +74,7 @@ describe 'Params Multi Types' do
     end
 
     it 'has consistent types' do
-      types = subject.map { |param| param['type'] }
+      types = subject.map { |param| param['schema']['type'] }
       expect(types).to eq(%w[string string string])
     end
   end

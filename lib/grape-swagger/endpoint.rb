@@ -195,6 +195,7 @@ module Grape
       end
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
+      GrapeSwagger::DocMethods::FormatData.move_to_schema(parameters)
 
       [parameters.presence, requestBody]
     end

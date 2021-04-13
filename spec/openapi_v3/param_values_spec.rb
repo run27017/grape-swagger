@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-# require 'grape_version'
+
+def first_parameter_info(request)
+  get "/swagger_doc/#{request}"
+  expect(last_response.status).to eq 200
+  body = JSON.parse last_response.body
+  body['paths']["/#{request}"]['post']['parameters'][0]
+end
 
 describe 'Convert values to enum or Range' do
   def app
@@ -40,23 +46,11 @@ describe 'Convert values to enum or Range' do
     end
   end
 
-  def first_parameter_info(request)
-    get "/swagger_doc/#{request}"
-    expect(last_response.status).to eq 200
-    body = JSON.parse last_response.body
-    body['paths']["/#{request}"]['post']['parameters']
-  end
-
   context 'Plain array values' do
     subject(:plain_array) { first_parameter_info('plain_array') }
+
     it 'has values as array in enum' do
-      expect(plain_array).to eq [{
-        'in' => 'formData',
-        'name' => 'letter',
-        'type' => 'string',
-        'required' => true,
-        'enum' => %w[a b c]
-      }]
+      expect(plain_array).to include('enum' => %w[a b c])
     end
   end
 
@@ -64,13 +58,7 @@ describe 'Convert values to enum or Range' do
     subject(:array_in_proc) { first_parameter_info('array_in_proc') }
 
     it 'has proc returned values as array in enum' do
-      expect(array_in_proc).to eq [{
-        'in' => 'formData',
-        'name' => 'letter',
-        'type' => 'string',
-        'required' => true,
-        'enum' => %w[d e f]
-      }]
+      expect(array_in_proc).to include('enum' => %w[d e f])
     end
   end
 
@@ -78,26 +66,13 @@ describe 'Convert values to enum or Range' do
     subject(:range_letter) { first_parameter_info('range_letter') }
 
     it 'has letter range values' do
-      expect(range_letter).to eq [{
-        'in' => 'formData',
-        'name' => 'letter',
-        'type' => 'string',
-        'required' => true
-      }]
+      expect(range_letter.keys).not_to include('enum')
     end
 
     subject(:range_integer) { first_parameter_info('range_integer') }
 
     it 'has integer range values' do
-      expect(range_integer).to eq [{
-        'in' => 'formData',
-        'name' => 'integer',
-        'type' => 'integer',
-        'required' => true,
-        'format' => 'int32',
-        'minimum' => -5,
-        'maximum' => 5
-      }]
+      expect(range_integer).to include('minimum' => -5, 'maximum' => 5)
     end
   end
 end
@@ -125,24 +100,11 @@ describe 'Convert values to enum for float range and not arrays inside a proc', 
     end
   end
 
-  def first_parameter_info(request)
-    get "/swagger_doc/#{request}"
-    expect(last_response.status).to eq 200
-    body = JSON.parse last_response.body
-    body['paths']["/#{request}"]['post']['parameters']
-  end
-
   context 'Non array in proc values' do
     subject(:non_array_in_proc) { first_parameter_info('non_array_in_proc') }
 
     it 'has proc returned value as string in enum' do
-      expect(non_array_in_proc).to eq [{
-        'in' => 'formData',
-        'name' => 'letter',
-        'type' => 'string',
-        'required' => true,
-        'enum' => 'string'
-      }]
+      expect(non_array_in_proc).to include('enum' => 'string')
     end
   end
 
@@ -150,13 +112,7 @@ describe 'Convert values to enum for float range and not arrays inside a proc', 
     subject(:range_float) { first_parameter_info('range_float') }
 
     it 'has float range values as string' do
-      expect(range_float).to eq [{
-        'in' => 'formData',
-        'name' => 'float',
-        'type' => 'number',
-        'required' => true,
-        'format' => 'float'
-      }]
+      expect(range_float).not_to include('enum')
     end
   end
 end

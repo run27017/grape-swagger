@@ -59,9 +59,9 @@ describe 'Form Params' do
 
   it 'treats Symbol parameter as form param' do
     expect(subject['paths']['/items/{id}']['post']['parameters']).to eq [
-      { 'in' => 'path', 'name' => 'id', 'description' => 'id of item', 'type' => 'integer', 'required' => true, 'format' => 'int32' },
-      { 'in' => 'formData', 'name' => 'name', 'description' => 'name of item', 'type' => 'string', 'required' => true },
-      { 'in' => 'formData', 'name' => 'conditions', 'description' => 'conditions of item', 'type' => 'string', 'required' => false, 'enum' => %w[one two] }
+      { 'in' => 'path', 'name' => 'id', 'description' => 'id of item', 'schema' => { 'type' => 'integer', 'format' => 'int32' }, 'required' => true },
+      { 'in' => 'formData', 'name' => 'name', 'description' => 'name of item', 'schema' => { 'type' => 'string' }, 'required' => true },
+      { 'in' => 'formData', 'name' => 'conditions', 'description' => 'conditions of item', 'schema' => { 'type' => 'string' }, 'required' => false, 'enum' => %w[one two] }
     ]
   end
 end

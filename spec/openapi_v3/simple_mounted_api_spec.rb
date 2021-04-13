@@ -143,8 +143,8 @@ describe 'a simple mounted api' do
             'get' => {
               'summary' => 'this gets something else',
               'parameters' => [
-                { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'type' => 'string', 'required' => true },
-                { 'in' => 'header', 'name' => 'XOtherHeader', 'description' => 'An optional header.', 'type' => 'string', 'required' => false }
+                { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'schema' => { 'type' => 'string' }, 'required' => true },
+                { 'in' => 'header', 'name' => 'XOtherHeader', 'description' => 'An optional header.', 'schema' => { 'type' => 'string' }, 'required' => false }
               ],
               'tags' => ['simple_with_headers'],
               'operationId' => 'getSimpleWithHeaders',
@@ -158,7 +158,7 @@ describe 'a simple mounted api' do
           '/items' => {
             'post' => {
               'summary' => 'this takes an array of parameters',
-              'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'string' } }],
+              'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'string' } } }],
               'tags' => ['items'],
               'operationId' => 'postItems',
               'responses' => { '201' => { 'description' => 'this takes an array of parameters' } }
@@ -167,7 +167,7 @@ describe 'a simple mounted api' do
           '/custom' => {
             'get' => {
               'summary' => 'this uses a custom parameter',
-              'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'CustomType' } }],
+              'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'CustomType' } } }],
               'tags' => ['custom'],
               'operationId' => 'getCustom',
               'responses' => { '200' => { 'description' => 'this uses a custom parameter' } }
@@ -247,8 +247,8 @@ describe 'a simple mounted api' do
             'get' => {
               'summary' => 'this gets something else',
               'parameters' => [
-                { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'type' => 'string', 'required' => true },
-                { 'in' => 'header', 'name' => 'XOtherHeader', 'description' => 'An optional header.', 'type' => 'string', 'required' => false }
+                { 'in' => 'header', 'name' => 'XAuthToken', 'description' => 'A required header.', 'schema' => { 'type' => 'string' }, 'required' => true },
+                { 'in' => 'header', 'name' => 'XOtherHeader', 'description' => 'An optional header.', 'schema' => { 'type' => 'string' }, 'required' => false }
               ],
               'tags' => ['simple_with_headers'],
               'operationId' => 'getSimpleWithHeaders',
@@ -274,7 +274,7 @@ describe 'a simple mounted api' do
           '/items' => {
             'post' => {
               'summary' => 'this takes an array of parameters',
-              'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'string' } }],
+              'parameters' => [{ 'in' => 'formData', 'name' => 'items[]', 'description' => 'array of items', 'required' => false, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'string' } } }],
               'tags' => ['items'],
               'operationId' => 'postItems',
               'responses' => { '201' => { 'description' => 'this takes an array of parameters' } }
@@ -295,7 +295,7 @@ describe 'a simple mounted api' do
           '/custom' => {
             'get' => {
               'summary' => 'this uses a custom parameter',
-              'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'type' => 'array', 'items' => { 'type' => 'CustomType' } }],
+              'parameters' => [{ 'in' => 'formData', 'name' => 'custom', 'description' => 'array of items', 'required' => false, 'schema' => { 'type' => 'array', 'items' => { 'type' => 'CustomType' } } }],
               'tags' => ['custom'],
               'operationId' => 'getCustom',
               'responses' => { '200' => { 'description' => 'this uses a custom parameter' } }

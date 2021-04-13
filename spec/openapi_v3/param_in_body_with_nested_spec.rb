@@ -3,15 +3,10 @@
 require 'spec_helper'
 
 describe 'moving body/formData Params to definitions' do
-  include_context "#{MODEL_PARSER} swagger example"
-
   before :all do
-    module TheApi
-      class NestedBodyParamTypeApi < Grape::API
+    module NestedBodyParamType
+      class TheApi < Grape::API
         namespace :simple_nested_params do
-          desc 'post in body with nested parameters',
-               detail: 'more details description',
-               success: Entities::UseNestedWithAddress
           params do
             optional :contact, type: Hash do
               requires :name, type: String, documentation: { desc: 'name', in: 'body' }
@@ -23,14 +18,10 @@ describe 'moving body/formData Params to definitions' do
               end
             end
           end
-
           post '/in_body' do
             { 'declared_params' => declared(params) }
           end
 
-          desc 'put in body with nested parameters',
-               detail: 'more details description',
-               success: Entities::UseNestedWithAddress
           params do
             requires :id, type: Integer
             optional :name, type: String, documentation: { desc: 'name', in: 'body' }
@@ -41,15 +32,12 @@ describe 'moving body/formData Params to definitions' do
               optional :country, type: String, documentation: { desc: 'country', in: 'body' }
             end
           end
-
           put '/in_body/:id' do
             { 'declared_params' => declared(params) }
           end
         end
 
         namespace :multiple_nested_params do
-          desc 'put in body with multiple nested parameters',
-               success: Entities::UseNestedWithAddress
           params do
             optional :contact, type: Hash do
               requires :name, type: String, documentation: { desc: 'name', in: 'body' }
@@ -67,13 +55,10 @@ describe 'moving body/formData Params to definitions' do
               end
             end
           end
-
           post '/in_body' do
             { 'declared_params' => declared(params) }
           end
 
-          desc 'put in body with multiple nested parameters',
-               success: Entities::UseNestedWithAddress
           params do
             requires :id, type: Integer
             optional :name, type: String, documentation: { desc: 'name', in: 'body' }
@@ -90,7 +75,6 @@ describe 'moving body/formData Params to definitions' do
               optional :country, type: String, documentation: { desc: 'country', in: 'body' }
             end
           end
-
           put '/in_body/:id' do
             { 'declared_params' => declared(params) }
           end
@@ -102,7 +86,7 @@ describe 'moving body/formData Params to definitions' do
   end
 
   def app
-    TheApi::NestedBodyParamTypeApi
+    NestedBodyParamType::TheApi
   end
 
   describe 'nested body parameters given' do
@@ -153,7 +137,7 @@ describe 'moving body/formData Params to definitions' do
       specify do
         expect(subject['paths']['/simple_nested_params/in_body/{id}']['put']['parameters']).to eql(
           [
-            { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
+            { 'in' => 'path', 'name' => 'id', 'schema' => { 'type' => 'integer', 'format' => 'int32' }, 'required' => true },
             { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/components/schemas/putSimpleNestedParamsInBody' } }
           ]
         )
@@ -241,7 +225,7 @@ describe 'moving body/formData Params to definitions' do
       specify do
         expect(subject['paths']['/multiple_nested_params/in_body/{id}']['put']['parameters']).to eql(
           [
-            { 'in' => 'path', 'name' => 'id', 'type' => 'integer', 'format' => 'int32', 'required' => true },
+            { 'in' => 'path', 'name' => 'id', 'schema' => { 'type' => 'integer', 'format' => 'int32' }, 'required' => true },
             { 'name' => 'body', 'in' => 'body', 'required' => true, 'schema' => { '$ref' => '#/components/schemas/putMultipleNestedParamsInBody' } }
           ]
         )
