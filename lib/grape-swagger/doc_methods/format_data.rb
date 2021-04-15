@@ -18,7 +18,7 @@ module GrapeSwagger
         def move_to_schema(parameters)
           parameters.reject { |parameter| parameter[:in] == 'body' }.each do |b|
             schema = {}
-            %i[type format items].each { |key| schema[key] = b.delete(key) if b.key?(key) }
+            %i[type format items enum default].each { |key| schema[key] = b.delete(key) if b.key?(key) }
             b.merge!(schema: schema)
           end
 

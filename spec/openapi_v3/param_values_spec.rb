@@ -2,11 +2,13 @@
 
 require 'spec_helper'
 
-def first_parameter_info(request)
+def first_parameter_info(request, *digs)
   get "/swagger_doc/#{request}"
   expect(last_response.status).to eq 200
   body = JSON.parse last_response.body
-  body['paths']["/#{request}"]['post']['parameters'][0]
+  param = body['paths']["/#{request}"]['post']['parameters'][0]
+  param = param.dig(*digs) unless digs.empty?
+  param
 end
 
 describe 'Convert values to enum or Range' do
@@ -47,7 +49,7 @@ describe 'Convert values to enum or Range' do
   end
 
   context 'Plain array values' do
-    subject(:plain_array) { first_parameter_info('plain_array') }
+    subject(:plain_array) { first_parameter_info('plain_array', 'schema') }
 
     it 'has values as array in enum' do
       expect(plain_array).to include('enum' => %w[a b c])
@@ -55,7 +57,7 @@ describe 'Convert values to enum or Range' do
   end
 
   context 'Array in proc values' do
-    subject(:array_in_proc) { first_parameter_info('array_in_proc') }
+    subject(:array_in_proc) { first_parameter_info('array_in_proc', 'schema') }
 
     it 'has proc returned values as array in enum' do
       expect(array_in_proc).to include('enum' => %w[d e f])
@@ -63,7 +65,7 @@ describe 'Convert values to enum or Range' do
   end
 
   context 'Range values' do
-    subject(:range_letter) { first_parameter_info('range_letter') }
+    subject(:range_letter) { first_parameter_info('range_letter', 'schema') }
 
     it 'has letter range values' do
       expect(range_letter.keys).not_to include('enum')
@@ -101,7 +103,7 @@ describe 'Convert values to enum for float range and not arrays inside a proc', 
   end
 
   context 'Non array in proc values' do
-    subject(:non_array_in_proc) { first_parameter_info('non_array_in_proc') }
+    subject(:non_array_in_proc) { first_parameter_info('non_array_in_proc', 'schema') }
 
     it 'has proc returned value as string in enum' do
       expect(non_array_in_proc).to include('enum' => 'string')
@@ -109,7 +111,7 @@ describe 'Convert values to enum for float range and not arrays inside a proc', 
   end
 
   context 'Range values' do
-    subject(:range_float) { first_parameter_info('range_float') }
+    subject(:range_float) { first_parameter_info('range_float', 'schema') }
 
     it 'has float range values as string' do
       expect(range_float).not_to include('enum')

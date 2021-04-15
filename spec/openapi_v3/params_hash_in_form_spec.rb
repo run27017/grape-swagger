@@ -60,7 +60,7 @@ describe 'Group Params as Hash' do
         { 'in' => 'formData', 'name' => 'typed_group[id]', 'description' => 'integer given', 'schema' => { 'type' => 'integer', 'format' => 'int32' }, 'required' => true },
         { 'in' => 'formData', 'name' => 'typed_group[name]', 'description' => 'string given', 'schema' => { 'type' => 'string' }, 'required' => true },
         { 'in' => 'formData', 'name' => 'typed_group[email]', 'description' => 'email given', 'schema' => { 'type' => 'string' }, 'required' => false },
-        { 'in' => 'formData', 'name' => 'typed_group[others]', 'schema' => { 'type' => 'integer', 'format' => 'int32' }, 'required' => false, 'enum' => [1, 2, 3] }
+        { 'in' => 'formData', 'name' => 'typed_group[others]', 'schema' => { 'type' => 'integer', 'format' => 'int32', 'enum' => [1, 2, 3] }, 'required' => false }
       )
     end
   end
