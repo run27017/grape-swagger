@@ -296,7 +296,7 @@ RSpec.shared_context 'mock swagger example' do
                 'type' => 'string',
                 'description' => "it's a mock"
               }
-            },
+            }
           },
           'ApiError' => {
             'type' => 'object',
@@ -305,7 +305,7 @@ RSpec.shared_context 'mock swagger example' do
                 'type' => 'string',
                 'description' => "it's a mock"
               }
-            },
+            }
           },
           'Something' => {
             'type' => 'object',
@@ -314,7 +314,7 @@ RSpec.shared_context 'mock swagger example' do
                 'type' => 'string',
                 'description' => "it's a mock"
               }
-            },
+            }
           }
         }
       }

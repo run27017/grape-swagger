@@ -17,31 +17,30 @@ require 'grape-swagger/doc_methods/version'
 
 module GrapeSwagger
   module DocMethods
-    DEFAULTS =
-      {
-        info: {},
-        models: [],
-        doc_version: '0.0.1',
-        target_class: nil,
-        mount_path: '/swagger_doc',
-        host: nil,
-        base_path: nil,
-        add_base_path: false,
-        add_version: true,
-        add_root: false,
-        hide_documentation_path: true,
-        format: :json,
-        authorizations: nil,
-        security_definitions: nil,
-        security: nil,
-        api_documentation: { desc: 'Swagger compatible API description' },
-        specific_api_documentation: { desc: 'Swagger compatible API description for specific API' },
-        endpoint_auth_wrapper: nil,
-        swagger_endpoint_guard: nil,
-        token_owner: nil,
-        models_flatten: true,
-        use_request_body: true
-      }
+    DEFAULTS = {
+      info: {},
+      models: [],
+      doc_version: '0.0.1',
+      target_class: nil,
+      mount_path: '/swagger_doc',
+      host: nil,
+      base_path: nil,
+      add_base_path: false,
+      add_version: true,
+      add_root: false,
+      hide_documentation_path: true,
+      format: :json,
+      authorizations: nil,
+      security_definitions: nil,
+      security: nil,
+      api_documentation: { desc: 'Swagger compatible API description' },
+      specific_api_documentation: { desc: 'Swagger compatible API description for specific API' },
+      endpoint_auth_wrapper: nil,
+      swagger_endpoint_guard: nil,
+      token_owner: nil,
+      models_flatten: true,
+      use_request_body: true
+    }
 
     FORMATTER_METHOD = %i[format default_format default_error_formatter].freeze
 
@@ -108,7 +107,7 @@ module GrapeSwagger
         return doc_cache if options[:use_cache] && doc_cache
 
         output = GrapeSwagger::DocMethods
-          .output_path_definitions(target_class.combined_namespace_routes, self, target_class, options)
+                 .output_path_definitions(target_class.combined_namespace_routes, self, target_class, options)
         doc_cache = output if options[:use_cache]
         output
       end

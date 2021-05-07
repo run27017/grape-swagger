@@ -34,7 +34,6 @@ describe 'param documentation overrides' do
     end
 
     it 'reads param type correctly' do
-      binding.pry
       expect(subject[0]).to include('schema' => { 'type' => 'string' })
     end
   end
@@ -48,7 +47,6 @@ describe 'param documentation overrides' do
     end
 
     it 'reads param type correctly' do
-      binding.pry
       expect(subject[0]).to include(
         'schema' => {
           'type' => 'string',

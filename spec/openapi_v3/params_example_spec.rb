@@ -29,21 +29,22 @@ describe 'Param example' do
 
     specify do
       expect(subject['paths']['/endpoint_with_examples']['get']['parameters']).to eql(
-        [{"in"=>"query",
-          "name"=>"id",
-          "required"=>true,
-          "example"=>123,
-          "schema"=>{"type"=>"integer", "format"=>"int32"}},
-      {"in"=>"query",
-       "name"=>"name",
-       "required"=>false,
-       "example"=>"Person",
-       "schema"=>{"type"=>"string"}},
-      {"in"=>"query",
-       "name"=>"obj",
-       "required"=>false,
-       "example"=>{"foo"=>"bar"},
-       "schema"=>{"type"=>"Object"}}])
+        [{ 'in' => 'query',
+           'name' => 'id',
+           'required' => true,
+           'example' => 123,
+           'schema' => { 'type' => 'integer', 'format' => 'int32' } },
+         { 'in' => 'query',
+           'name' => 'name',
+           'required' => false,
+           'example' => 'Person',
+           'schema' => { 'type' => 'string' } },
+         { 'in' => 'query',
+           'name' => 'obj',
+           'required' => false,
+           'example' => { 'foo' => 'bar' },
+           'schema' => { 'type' => 'Object' } }]
+      )
     end
   end
 end

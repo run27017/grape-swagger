@@ -92,7 +92,7 @@ describe 'response with headers' do
     specify do
       expect(subject['paths']['/response_headers']['get']).to eql(
         'summary' => 'This returns headers',
-        
+
         'responses' => {
           '200' => { 'description' => 'This returns headers', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'headers' => header_200 },
           '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => examples_404, 'headers' => header_404 }
@@ -151,7 +151,7 @@ describe 'response with headers' do
     specify do
       expect(subject['paths']['/file_response_headers']['get']).to eql(
         'summary' => 'A file can have headers too',
-        
+
         'responses' => {
           '200' => { 'description' => 'A file can have headers too', 'headers' => header_200, 'schema' => { 'type' => 'file' } },
           '404' => { 'description' => 'NotFound', 'headers' => header_404, 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'examples' => examples_404 }
@@ -181,7 +181,7 @@ describe 'response with headers' do
     specify do
       expect(subject['paths']['/response_failure_headers']['get']).to eql(
         'summary' => 'This syntax also returns headers',
-        
+
         'responses' => {
           '200' => { 'description' => 'This syntax also returns headers', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } }, 'headers' => header_200 },
           '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } }, 'headers' => header_404 },
@@ -202,7 +202,7 @@ describe 'response with headers' do
     specify do
       expect(subject['paths']['/response_no_headers']['get']).to eql(
         'summary' => 'This does not return headers',
-        
+
         'responses' => {
           '200' => { 'description' => 'This does not return headers', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/UseResponse' } } } },
           '404' => { 'description' => 'NotFound', 'content' => { 'application/json' => { 'schema' => { '$ref' => '#/components/schemas/ApiError' } } } }

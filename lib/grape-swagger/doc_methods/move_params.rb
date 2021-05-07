@@ -12,15 +12,18 @@ module GrapeSwagger
           move_methods.include?(http_verb) && includes_body_param?(params)
         end
 
-        def to_params_and_request_body(path, params, route, definitions, options={})
+        def to_params_and_request_body(path, params, route, definitions, options = {})
           @definitions = definitions
           @options = options
           unify!(params)
 
           params_to_move = movable_params(params)
 
-          bodyParams = should_correct_array?(params_to_move) ?
-            correct_array_param(params_to_move)[0] : parent_definition_of_params(params_to_move, path, route)
+          bodyParams = if should_correct_array?(params_to_move)
+                         correct_array_param(params_to_move)[0]
+                       else
+                         parent_definition_of_params(params_to_move, path, route)
+                       end
 
           if @options[:use_request_body]
             [params, {
@@ -58,7 +61,7 @@ module GrapeSwagger
             @definitions[definition_name] = schema
             schema = definition_name
           end
-          
+
           build_body_parameter(schema, 'body', route.options)
         end
 

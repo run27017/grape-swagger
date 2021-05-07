@@ -299,7 +299,7 @@ RSpec.shared_context 'entity swagger example' do
         'QueryInput' => {
           'type' => 'object',
           'required' => ['elements'],
-          'properties' => { 'elements' => { 'type' => 'array', 'items' => { '$ref' => '#/components/schemas/QueryInputElement' }, 'description' => 'Set of configuration' } },
+          'properties' => { 'elements' => { 'type' => 'array', 'items' => { '$ref' => '#/components/schemas/QueryInputElement' }, 'description' => 'Set of configuration' } }
         },
         'QueryInputElement' => {
           'type' => 'object',
@@ -308,7 +308,7 @@ RSpec.shared_context 'entity swagger example' do
         },
         'ApiError' => {
           'type' => 'object',
-          'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } },
+          'properties' => { 'code' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'status code' }, 'message' => { 'type' => 'string', 'description' => 'error message' } }
         },
         'Something' => {
           'type' => 'object',
@@ -317,7 +317,7 @@ RSpec.shared_context 'entity swagger example' do
             'text' => { 'type' => 'string', 'description' => 'Content of something.' },
             'links' => { 'type' => 'array', 'items' => { 'type' => 'link' } },
             'others' => { 'type' => 'text' }
-          },
+          }
         }
       }
     }

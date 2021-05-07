@@ -39,22 +39,22 @@ describe 'response' do
 
     specify do
       expect(subject['paths']['/use-response']['post']['parameters']).to eql([{
-        'name'=>'body',
-        'in'=>'body',
-        'required'=>true,
-        'schema'=> {
-          'type'=>'object',
-          'properties'=> {
-            'in_body_1'=>{'type'=>'integer', 'format'=>'int32', 'description'=>'in_body_1'},
-            'in_body_2'=>{'type'=>'string', 'description'=>'in_body_2'}, 
-            'in_body_3'=>{'type'=>'string', 'description'=>'in_body_3'}
+        'name' => 'body',
+        'in' => 'body',
+        'required' => true,
+        'schema' => {
+          'type' => 'object',
+          'properties' => {
+            'in_body_1' => { 'type' => 'integer', 'format' => 'int32', 'description' => 'in_body_1' },
+            'in_body_2' => { 'type' => 'string', 'description' => 'in_body_2' },
+            'in_body_3' => { 'type' => 'string', 'description' => 'in_body_3' }
           },
-          'required'=>['in_body_1']
+          'required' => ['in_body_1']
         }
       }])
       expect(subject['paths']['/use-response']['post']['responses']).to eql(
-          '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } },
-          '400' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } }
+        '200' => { 'description' => 'This returns something', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } },
+        '400' => { 'description' => 'BadRequest', 'content' => { 'application/json' => { 'schema' => { 'type' => 'object', 'properties' => { 'mock_data' => { 'type' => 'string', 'description' => "it's a mock" } } } } } }
       )
     end
   end

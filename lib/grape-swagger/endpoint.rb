@@ -5,7 +5,7 @@ require 'active_support/core_ext/string/inflections'
 require 'grape-swagger/endpoint/params_parser'
 
 module Grape
-  class Endpoint
+  class Endpoint # rubocop:disable Metrics/ClassLength
     def content_types_for(target_class)
       content_types = (target_class.content_types || {}).values
 
@@ -23,7 +23,7 @@ module Grape
     # swagger spec2.0 related parts
     #
     # required keys for SwaggerObject
-    def swagger_object(target_class, request, options)
+    def swagger_object(_target_class, request, options)
       object = {
         openapi: '3.0.0',
         info: info_object(options[:info].merge(version: options[:doc_version])),
@@ -119,7 +119,7 @@ module Grape
       method[:description] = description_object(route)
       # method[:produces]    = produces_object(route, options[:produces] || options[:format])
       # method[:consumes]    = consumes_object(route, options[:format])
-      method[:parameters], method[:requestBody]  = params_and_request_body_object(route, options, path)
+      method[:parameters], method[:requestBody] = params_and_request_body_object(route, options, path)
       method[:security]    = security_object(route)
       method[:responses]   = response_object(route, options)
       method[:tags]        = route.options.fetch(:tags, tag_object(route, path))
@@ -191,7 +191,9 @@ module Grape
       end
 
       if GrapeSwagger::DocMethods::MoveParams.can_be_moved?(route.request_method, parameters)
-        parameters, requestBody = GrapeSwagger::DocMethods::MoveParams.to_params_and_request_body(path, parameters, route, @definitions, options)
+        parameters, requestBody = GrapeSwagger::DocMethods::MoveParams.to_params_and_request_body(
+          path, parameters, route, @definitions, options
+        )
       end
 
       GrapeSwagger::DocMethods::FormatData.to_format(parameters)
@@ -200,6 +202,8 @@ module Grape
       [parameters.presence, requestBody]
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def response_object(route, options)
       codes(route).each_with_object({}) do |value, memo|
         value[:message] ||= ''
@@ -226,11 +230,14 @@ module Grape
           response_model = value[:model] ? parse_model_into_definition(value[:model]) : @item
           next unless @definitions[response_model]
           next if response_model.start_with?('Swagger_doc')
+
           build_memo_schema(memo, route, value, response_model, options)
         end
         memo[value[:code]][:examples] = value[:examples] if value[:examples]
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
 
     def codes(route)
       http_codes_from_route(route).map do |x|
@@ -466,7 +473,8 @@ module Grape
 
     # make all $ref property flatten
     def make_models_flatten!(object, definitions)
-      if object.is_a?(Hash)
+      case object
+      when Hash
         if object.key?('$ref')
           prefix = '#/components/schemas/'
           unless object['$ref'].start_with?('#/components/schemas/')
@@ -478,8 +486,8 @@ module Grape
           object.merge!(model)
         end
 
-        object.each { |key, val| make_models_flatten!(val, definitions) }
-      elsif object.is_a?(Array)
+        object.each { |_key, val| make_models_flatten!(val, definitions) }
+      when Array
         object.each { |val| make_models_flatten!(val, definitions) }
       end
 
@@ -487,14 +495,15 @@ module Grape
     end
 
     def fix_refs_conflicts!(object)
-      if object.is_a?(Hash)
-        object.each { |key, val| fix_refs_conflicts!(val) }
+      case object
+      when Hash
+        object.each { |_key, val| fix_refs_conflicts!(val) }
 
         if object.key?('$ref') && object.length > 1
           ref = object.delete('$ref')
           object['allOf'] = ['$ref' => ref]
         end
-      elsif object.is_a?(Array)
+      when Array
         object.each { |val| fix_refs_conflicts!(val) }
       end
 
